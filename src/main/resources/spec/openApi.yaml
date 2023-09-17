@@ -1,0 +1,298 @@
+openapi: 3.0.1
+info:
+  title: OTUS high-load project
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+tags:
+  - name: Actuator
+    description: Monitor and interact
+    externalDocs:
+      description: Spring Boot Actuator Web API Documentation
+      url: https://docs.spring.io/spring-boot/docs/current/actuator-api/html/
+paths:
+  /user/register:
+    post:
+      tags:
+        - user-controller
+      summary: Register user
+      description: Register user
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /login:
+    post:
+      tags:
+        - login-controller
+      summary: Authenticate user
+      description: Authenticate user by login/password, get bearer token
+      operationId: authenticate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuthenticationRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthenticationDtoResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /user/get/{id}:
+    get:
+      tags:
+        - user-controller
+      summary: Get user by id
+      description: Get user by id
+      operationId: getById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: token
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /user/get/all:
+    get:
+      tags:
+        - user-controller
+      summary: Get all users
+      description: Get all users
+      operationId: getAll
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /actuator:
+    get:
+      tags:
+        - Actuator
+      summary: Actuator root web endpoint
+      operationId: links
+      responses:
+        '200':
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Link'
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Link'
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Link'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /actuator/health:
+    get:
+      tags:
+        - Actuator
+      summary: Actuator web endpoint 'health'
+      operationId: health
+      responses:
+        '200':
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+  /actuator/health/**:
+    get:
+      tags:
+        - Actuator
+      summary: Actuator web endpoint 'health-path'
+      operationId: health-path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                type: object
+            application/vnd.spring-boot.actuator.v2+json:
+              schema:
+                type: object
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+components:
+  schemas:
+    City:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+    Hobby:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    User:
+      required:
+        - UserAge
+        - UserFirstName
+        - UserGender
+        - UserSecondName
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int32
+        UserFirstName:
+          type: string
+        UserSecondName:
+          type: string
+        UserAge:
+          type: integer
+          format: int32
+        UserGender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+        City:
+          $ref: '#/components/schemas/City'
+        Hobbies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hobby'
+      description: User DTO
+    UserRegistrationRequest:
+      required:
+        - User
+        - UserLogin
+        - UserPassword
+      type: object
+      properties:
+        UserLogin:
+          type: string
+        UserPassword:
+          type: string
+        User:
+          $ref: '#/components/schemas/User'
+      description: User registration request
+    UserAuthenticationRequest:
+      required:
+        - UserLogin
+        - UserPassword
+      type: object
+      properties:
+        UserLogin:
+          type: string
+        UserPassword:
+          type: string
+      description: User authentication request
+    AuthenticationDtoResponse:
+      required:
+        - BearerToken
+        - TokenLifetime
+      type: object
+      properties:
+        BearerToken:
+          type: string
+        TokenLifetime:
+          type: string
+          format: date
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        templated:
+          type: boolean
