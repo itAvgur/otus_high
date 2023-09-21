@@ -35,6 +35,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     //DB
     implementation("org.springframework.boot:spring-boot-starter-jdbc:$springVersion")
+    implementation("org.postgresql:postgresql:42.6.0")
     runtimeOnly("com.mysql:mysql-connector-j")
     implementation("org.flywaydb:flyway-core:9.20.1")
     implementation("org.flywaydb:flyway-mysql:9.20.1")

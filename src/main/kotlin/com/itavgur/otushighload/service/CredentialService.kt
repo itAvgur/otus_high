@@ -5,7 +5,6 @@ import com.itavgur.otushighload.domain.Credential
 import com.itavgur.otushighload.exception.CredentialException
 import com.itavgur.otushighload.web.dto.AuthenticationDtoRequest
 import com.itavgur.otushighload.web.dto.AuthenticationDtoResponse
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -15,8 +14,8 @@ import java.util.*
 
 @Component
 class CredentialService(
-    @Autowired val credentialDao: CredentialDao,
-    @Autowired val passwordEncoder: PasswordEncoder
+    val credentialDao: CredentialDao,
+    val passwordEncoder: PasswordEncoder
 ) {
 
     @Value("\${token.expired.days: 0}")
