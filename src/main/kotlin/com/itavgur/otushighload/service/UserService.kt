@@ -7,9 +7,9 @@ import com.itavgur.otushighload.exception.UserNotFoundException
 import com.itavgur.otushighload.web.dto.UserDto
 import com.itavgur.otushighload.web.dto.UserRegistrationRequest
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
-@Component
+@Service
 class UserService(
     @Autowired private val userDao: UserDao,
     @Autowired private val credentialService: CredentialService

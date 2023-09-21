@@ -1,17 +1,27 @@
 package com.itavgur.otushighload.dao
 
+import com.itavgur.otushighload.config.MysqlDBConfig
 import com.itavgur.otushighload.domain.City
 import com.itavgur.otushighload.domain.Gender
 import com.itavgur.otushighload.domain.User
 import com.itavgur.otushighload.util.DBUtil.Companion.getIntValue
 import com.itavgur.otushighload.util.DBUtil.Companion.getStringValue
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
+import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.jdbc.support.GeneratedKeyHolder
+import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Propagation
+import org.springframework.transaction.annotation.Transactional
 import java.sql.ResultSet
 
+
+@Repository
+@ConditionalOnBean(MysqlDBConfig::class)
 class UserDaoMySql(
+    private val jdbcTemplate: JdbcTemplate,
     private val namedParameterJdbcTemplate: NamedParameterJdbcTemplate,
     private val cityDao: CityDaoMySql
 ) : UserDao {
@@ -66,6 +76,7 @@ class UserDaoMySql(
         return result.firstOrNull()
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = [Exception::class, RuntimeException::class])
     override fun createUser(user: User): User {
 
         user.city?.let {
@@ -115,6 +126,8 @@ class UserDaoMySql(
     }
 }
 
+@Repository
+@ConditionalOnBean(MysqlDBConfig::class)
 class CityDaoMySql(
     private val namedParameterJdbcTemplate: NamedParameterJdbcTemplate
 ) {

@@ -1,13 +1,18 @@
 package com.itavgur.otushighload.dao
 
+import com.itavgur.otushighload.config.MysqlDBConfig
 import com.itavgur.otushighload.domain.Credential
 import com.itavgur.otushighload.util.DBUtil
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.jdbc.support.GeneratedKeyHolder
+import org.springframework.stereotype.Repository
 import java.sql.ResultSet
 
+@Repository
+@ConditionalOnBean(MysqlDBConfig::class)
 class CredentialDaoMysql(
     private val namedParameterJdbcTemplate: NamedParameterJdbcTemplate,
 ) : CredentialDao {
