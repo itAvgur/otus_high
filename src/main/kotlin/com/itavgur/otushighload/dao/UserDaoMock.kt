@@ -50,6 +50,13 @@ class UserDaoMock : UserDao {
         return deletedEntries
     }
 
+    override fun searchUsersByFirstNameAndLastName(firstName: String?, lastName: String?): Set<User> {
+        return sqlTable.filter {
+            it.firstName.contains(Regex("^$firstName")) && it.lastName.contains(Regex("^$lastName"))
+        }
+            .toSet()
+    }
+
     private fun initTable(): MutableSet<User> {
 
         val mockUser01 = User(

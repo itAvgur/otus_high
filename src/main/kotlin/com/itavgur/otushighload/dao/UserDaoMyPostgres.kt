@@ -34,7 +34,7 @@ class UserDaoMyPostgres(
         const val QUERY_GET_USER_BY_ID =
             """SELECT users.id ,users.first_name, users.last_name, users.age,users.gender, c.id as city_id, c.name as city_name
                 FROM users JOIN cities c on c.id = users.city_id
-                where users.id = :userId"""
+                WHERE users.id = :userId"""
 
         const val QUERY_INSERT_USER =
             """INSERT INTO users (first_name, last_name, age, gender, city_id)
@@ -45,12 +45,17 @@ class UserDaoMyPostgres(
                 SET first_name = :firstName, last_name = :lastName, age = :age, gender = :gender, city_id = :cityId
                 WHERE users.id = :id"""
 
+        const val QUERY_SEARCH_USERS_BY_FIRST_AND_LAST_NAME =
+            """SELECT users.id ,users.first_name, users.last_name, users.age,users.gender, c.id as city_id, c.name as city_name
+                FROM users JOIN cities c on c.id = users.city_id
+                WHERE users.first_name LIKE :firstName AND users.last_name LIKE :lastName
+                """
+
     }
 
     override fun getUsers(): Set<User> {
 
         val map = MapSqlParameterSource()
-
         val result = namedParameterJdbcTemplate.query(QUERY_GET_ALL_USERS, map, UserRowMapper())
         return result.toSet()
     }
@@ -122,6 +127,15 @@ class UserDaoMyPostgres(
 
     override fun deleteUser(id: Int): Int {
         TODO("Not yet implemented")
+    }
+
+    override fun searchUsersByFirstNameAndLastName(firstName: String?, lastName: String?): Set<User> {
+
+        val map = MapSqlParameterSource(
+            mapOf("firstName" to "$firstName%", "lastName" to "$lastName%")
+        )
+        val result = namedParameterJdbcTemplate.query(QUERY_SEARCH_USERS_BY_FIRST_AND_LAST_NAME, map, UserRowMapper())
+        return result.toSet()
     }
 }
 

@@ -124,6 +124,10 @@ class UserDaoMySql(
     override fun deleteUser(id: Int): Int {
         TODO("Not yet implemented")
     }
+
+    override fun searchUsersByFirstNameAndLastName(firstName: String?, lastName: String?): Set<User> {
+        TODO("Not yet implemented")
+    }
 }
 
 @Repository

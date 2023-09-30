@@ -13,4 +13,6 @@ interface UserDao {
     fun updateUser(user: User): User
 
     fun deleteUser(id: Int): Int
+
+    fun searchUsersByFirstNameAndLastName(firstName: String?, lastName: String?): Set<User>
 }

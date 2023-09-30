@@ -2,13 +2,13 @@
 
 1) *run Mysql in docker*
 
-   docker network inspect otus   \
+   docker network create otus  \
    docker run -p 3306:3306 --name otus_mysql --network otus -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=otus_high -d
    mysql:8.0.34
 
    OR\
-   docker run --name otus_pg --network otus -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -e
-   POSTGRES_DB=otus_high -d postgres
+   docker run --name otus_pg --network otus -p 5432:5432 -v ~/pg_db:/var/lib/postgresql/data -e POSTGRES_USER=root -e
+   POSTGRES_PASSWORD=root -e POSTGRES_DB=otus_high -d postgres
 
 2) *run application in Docker*
 

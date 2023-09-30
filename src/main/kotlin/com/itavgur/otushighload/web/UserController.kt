@@ -33,4 +33,11 @@ class UserController(
     @GetMapping("/get/all")
     fun getAll(): List<UserDto> = userService.getUsers()
 
+    @Operation(summary = "Search users by first/last name", description = "Search users by first and last name")
+    @GetMapping("/search")
+    fun searchUsers(
+        @RequestParam(name = "firstName", required = false) firstName: String?,
+        @RequestParam(name = "lastName", required = false) lastName: String?
+    ): List<UserDto> = userService.searchUsers(firstName, lastName)
+
 }

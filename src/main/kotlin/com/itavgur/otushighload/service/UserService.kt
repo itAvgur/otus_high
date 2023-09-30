@@ -75,4 +75,13 @@ class UserService(
 
     }
 
+    fun searchUsers(firstName: String?, lastName: String?): List<UserDto> {
+        if (firstName.isNullOrBlank() && lastName.isNullOrBlank()) {
+            throw InvalidRequestException("both firstName and lastName are empty")
+        }
+        return userDao.searchUsersByFirstNameAndLastName(firstName, lastName).stream()
+            .map { UserDto.from(it) }
+            .toList()
+    }
+
 }
