@@ -1,27 +1,29 @@
 # otus_high
 
-1) *run Mysql in docker*
+1) *run DB in docker*
 
-   docker network create otus  \
-   docker run -p 3306:3306 --name otus_mysql --network otus -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=otus_high -d
-   mysql:8.0.34
+   docker network create otus
 
-   OR\
-   docker run --name otus_pg --network otus -p 5432:5432 -v ~/pg_db:/var/lib/postgresql/data -e POSTGRES_USER=root -e
-   POSTGRES_PASSWORD=root -e POSTGRES_DB=otus_high -d postgres
+   docker run --name otus_pg --network otus -p 5432:5432 -v ~/data:/data -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -e POSTGRES_DB=otus_high -d postgres
 
-2) *run application in Docker*
+   2) *run application in Docker*
 
-!!!IMPORTANT!!!
-There's a some bug, we need to run the application twice.
-There's a some issue with FlyWay, it can't create flyway table while the first run.
+   **ARM:**\
+   docker run -d -p 8080:8080 --network otus -e OTUS_DB_TYPE=postgres ygmelnikov/otus_hl_arm:0.0.3
 
-**ARM:**\
-docker run -d -p 8080:8080 --network otus -e OTUS_DB_TYPE=mysql ygmelnikov/otus_hl_arm
-
-**AMD64:**\
-docker run -d -p 8080:8080 --network otus -e OTUS_DB_TYPE=mysql ygmelnikov/otus_hl_amd64
+   **AMD64:**\
+   docker run -d -p 8080:8080 --network otus -e OTUS_DB_TYPE=postgres ygmelnikov/otus_hl_amd64:0.0.2
 
 3) *Postman (newman)*
 
    newman run high-available.postman_collection.json
+
+4) *Populate DB*
+   copy (populate.zip) (cities.csv, users.csv) to ~/data
+    
+   run SQL script: 
+
+   docker exec -it otus_pg psql otus_high -c "COPY cities FROM '/data/cities.csv' DELIMITER ',' CSV HEADER;" \
+   docker exec -it otus_pg psql otus_high -c "COPY users FROM '/data/users.csv' DELIMITER ',' CSV HEADER;" \
+   docker exec -it otus_pg psql otus_high -c "ALTER SEQUENCE cities_id_seq restart with 130;" \
+   docker exec -it otus_pg psql otus_high -c "ALTER SEQUENCE users_id_seq restart with 1000001;"
