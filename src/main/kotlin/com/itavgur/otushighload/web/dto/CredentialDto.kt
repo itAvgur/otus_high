@@ -4,12 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 @Schema(name = "UserCredentialRequest", description = "User credential request")
 data class CredentialDto(
-    @Schema(name = "UserLogin", required = true)
+    @Schema(name = "login", required = true)
     var login: String,
-    @Schema(name = "UserPassword", required = true)
+    @Schema(name = "pass", required = true)
     var pass: String,
-    @Schema(name = "UserPassword", required = true)
+    @Schema(name = "passRepeat", required = true)
     var passRepeat: String,
-    @Schema(name = "User", required = true)
+    @Schema(name = "user", description = "Users info", required = true)
     var user: UserDto
 )

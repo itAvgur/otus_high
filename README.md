@@ -4,12 +4,12 @@
 
    docker network create otus
 
-   docker run --name otus_pg --network otus -p 5432:5432 -v ~/data:/data -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -e POSTGRES_DB=otus_high -d postgres
+   docker run --name otus_pg --network otus -p 5432:5432 -v ~/pg/main:/data -v ~/pg/data:/data -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -e POSTGRES_DB=otus_high -d postgres
 
-   2) *run application in Docker*
+2) *run application in Docker*
 
    **ARM:**\
-   docker run -d -p 8080:8080 --network otus -e OTUS_DB_TYPE=postgres ygmelnikov/otus_hl_arm:0.0.3
+   docker run -d -p 8080:8080 --network otus -e OTUS_DB_TYPE=postgres ygmelnikov/otus_hl_arm:0.0.4
 
    **AMD64:**\
    docker run -d -p 8080:8080 --network otus -e OTUS_DB_TYPE=postgres ygmelnikov/otus_hl_amd64:0.0.2
@@ -19,9 +19,9 @@
    newman run high-available.postman_collection.json
 
 4) *Populate DB*
-   copy (populate.zip) (cities.csv, users.csv) to ~/data
-    
-   run SQL script: 
+   copy (populate.zip) (cities.csv, users.csv) to ~/pg/data
+
+   run SQL script:
 
    docker exec -it otus_pg psql otus_high -c "COPY cities FROM '/data/cities.csv' DELIMITER ',' CSV HEADER;" \
    docker exec -it otus_pg psql otus_high -c "COPY users FROM '/data/users.csv' DELIMITER ',' CSV HEADER;" \

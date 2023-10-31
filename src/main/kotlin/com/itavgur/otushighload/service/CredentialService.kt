@@ -74,6 +74,16 @@ class CredentialService(
         }
     }
 
+    @Throws(CredentialException::class)
+    fun getCredentialByToken(token: String): Credential {
+
+        val credential = credentialDao.getCredentialByToken(token)
+        if (credential == null || LocalDate.now().isAfter(credential.tokenExpired)) {
+            throw CredentialException("Credential isn't found", HttpStatus.UNAUTHORIZED)
+        }
+        return credential
+    }
+
     fun destroyCredential(credential: Credential): Int {
         return credentialDao.destroyCredential(credential)
     }

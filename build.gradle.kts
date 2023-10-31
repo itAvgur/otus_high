@@ -8,10 +8,19 @@ plugins {
     kotlin("jvm") version "1.9.10"
     kotlin("plugin.spring") version "1.9.10"
     id("org.flywaydb.flyway") version "9.20.1"
+    idea
 }
 
+idea {
+    module {
+        isDownloadJavadoc = true
+        isDownloadSources = true
+    }
+}
+
+
 group = "com.itavgur"
-version = "0.0.3"
+version = "0.0.4"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -35,18 +44,18 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     //DB
     implementation("org.springframework.boot:spring-boot-starter-jdbc:$springVersion")
-    implementation("org.postgresql:postgresql:42.6.0")
+    implementation("org.postgresql:postgresql:${project.properties["postgres.version"]}")
     runtimeOnly("com.mysql:mysql-connector-j")
-    implementation("org.flywaydb:flyway-core:9.20.1")
-    implementation("org.flywaydb:flyway-mysql:9.20.1")
+    implementation("org.flywaydb:flyway-core:${project.properties["flydb.version"]}")
+    implementation("org.flywaydb:flyway-mysql:${project.properties["flydb.version"]}")
     //monitoring
     implementation("org.springframework.boot:spring-boot-starter-actuator:$springVersion")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     //tests
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springVersion")
-    testImplementation("org.mockito:mockito-core:5.5.0")
+    testImplementation("org.mockito:mockito-core:${project.properties["mockito-core.version"]}")
     //swagger
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${project.properties["springdoc-webmvc.version"]}")
     //security
     implementation("org.springframework.boot:spring-boot-starter-security:$springVersion")
     //validation

@@ -43,7 +43,14 @@ class UserService(
         return UserDto.from(result)
     }
 
-    fun deleteUser(id: Int): Int = userDao.deleteUser(id)
+    fun deleteUser(id: Int): Int {
+
+        userDao.getUserById(id)
+            ?.let {
+                return userDao.deleteUser(id)
+            }
+        throw UserNotFoundException("user with id ${id} missed")
+    }
 
     fun registerUser(request: UserRegistrationRequest): UserDto {
 

@@ -10,13 +10,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 
 @EnableConfigurationProperties
-@OpenAPIDefinition(info = Info(title = "OTUS high-load project", version = "0.0.1"))
+@OpenAPIDefinition(info = Info(title = "OTUS high-load project", version = "0.0.4"))
 @SpringBootApplication(
     exclude = [DataSourceAutoConfiguration::class, DataSourceTransactionManagerAutoConfiguration::class,
         SecurityAutoConfiguration::class]
 )
-class OtusHighLoadApplicationKt
+class OtusHighLoadApplication
 
 fun main(args: Array<String>) {
-    runApplication<OtusHighLoadApplicationKt>(*args)
+    runApplication<OtusHighLoadApplication>(*args)
 }

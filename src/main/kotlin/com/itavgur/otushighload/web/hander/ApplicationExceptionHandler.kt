@@ -2,6 +2,8 @@ package com.itavgur.otushighload.web.hander
 
 import com.itavgur.otushighload.exception.CredentialException
 import com.itavgur.otushighload.exception.InvalidRequestException
+import com.itavgur.otushighload.exception.PostNotFoundException
+import com.itavgur.otushighload.exception.UserNotFoundException
 import com.itavgur.otushighload.util.logger
 import com.itavgur.otushighload.web.dto.GeneralErrorResponse
 import jakarta.servlet.http.HttpServletRequest
@@ -58,6 +60,28 @@ class ApplicationExceptionHandler {
 
     companion object {
         val LOG by logger()
+    }
+
+    @ExceptionHandler(PostNotFoundException::class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    fun handlePostNotFoundException(
+        req: HttpServletRequest,
+        exception: PostNotFoundException
+    ): ResponseEntity<Any> {
+        LOG.error("Bad API - PostNotFoundException : ${exception.message}")
+        val response = GeneralErrorResponse(HttpStatus.BAD_REQUEST, exception.message, null)
+        return ResponseEntity(response, HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(UserNotFoundException::class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    fun handleUserNotFoundException(
+        req: HttpServletRequest,
+        exception: UserNotFoundException
+    ): ResponseEntity<Any> {
+        LOG.error("Bad API - UserNotFoundException : ${exception.message}")
+        val response = GeneralErrorResponse(HttpStatus.BAD_REQUEST, exception.message, null)
+        return ResponseEntity(response, HttpStatus.BAD_REQUEST)
     }
 
 }

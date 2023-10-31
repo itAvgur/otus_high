@@ -6,12 +6,12 @@ import org.springframework.http.HttpStatus
 
 @Schema(name = "ResponseError", description = "Wrapper for the error response")
 data class GeneralErrorResponse<T>(
-    @Schema(name = "HTTPCode", required = true)
+    @Schema(name = "code", required = true)
     val code: HttpStatus,
-    @Schema(name = "Message", required = true)
+    @Schema(name = "message", required = true)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     val message: String? = null,
-    @Schema(name = "ResponseBody", required = true)
+    @Schema(name = "response", required = true)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     val response: T? = null
 )

@@ -1,8 +1,7 @@
 package com.itavgur.otushighload
 
-import com.itavgur.otushighload.MockitoHelper.anyObject
+import com.itavgur.otushighload.BaseTest.MockitoHelper.anyObject
 import com.itavgur.otushighload.dao.UserDao
-import com.itavgur.otushighload.dao.UserDaoMock
 import com.itavgur.otushighload.domain.*
 import com.itavgur.otushighload.exception.UserNotFoundException
 import com.itavgur.otushighload.service.CredentialService
@@ -11,28 +10,26 @@ import com.itavgur.otushighload.web.dto.UserDto
 import com.itavgur.otushighload.web.dto.UserRegistrationRequest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.BDDMockito.verify
+import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.*
-import org.mockito.Spy
 import org.mockito.junit.jupiter.MockitoExtension
-import org.springframework.test.annotation.DirtiesContext
 
 @ExtendWith(MockitoExtension::class)
-@DirtiesContext
 class UserServiceTest {
 
-    @Spy
-    private val userDao: UserDao = UserDaoMock()
+    @Mock
+    private lateinit var userDao: UserDao
 
     @Mock
     private lateinit var credentialService: CredentialService
 
+    @InjectMocks
     private lateinit var userService: UserService
 
     private val mockUser01 = User(
@@ -48,13 +45,9 @@ class UserServiceTest {
         hobbies = listOf(Hobby(3, "hobby-03"), Hobby(4, "hobby-04"))
     )
 
-    @BeforeEach
-    fun init() {
-        userService = UserService(userDao, credentialService)
-    }
-
     @Test
     fun givenValidUsers_whenGetUsers_thenGetThisUsers() {
+        given(userDao.getUsers()).willReturn(setOf(mockUser01, mockUser02))
         val actual = userService.getUsers()
         val expected = listOf(UserDto.from(mockUser01), UserDto.from(mockUser02))
         assertEquals((expected), actual)
@@ -73,15 +66,9 @@ class UserServiceTest {
 
     @Test
     fun givenValidUsers_whenGetUserById1_thenGetThisUser() {
+        given(userDao.getUserById(1)).willReturn(mockUser01)
         val actual = userService.getUser(1)
         val expected = UserDto.from(mockUser01)
-        assertEquals((expected), actual)
-    }
-
-    @Test
-    fun givenValidUsers_whenGetUserById2_thenGetThisUser() {
-        val actual = userService.getUser(2)
-        val expected = UserDto.from(mockUser02)
         assertEquals((expected), actual)
     }
 
@@ -99,6 +86,7 @@ class UserServiceTest {
             gender = Gender.MALE, city = City(0, "IKT"),
             hobbies = listOf(Hobby(1, "hobby-01"), Hobby(2, "hobby-02"))
         )
+        given(userDao.createUser(user = userDto.toUser())).willReturn(mockUser01)
 
         val result = userService.saveUser(userDto)
 
@@ -116,6 +104,8 @@ class UserServiceTest {
             gender = Gender.MALE, city = City(0, "IKT"),
             hobbies = listOf(Hobby(1, "hobby-01"), Hobby(2, "hobby-02"))
         )
+        given(userDao.getUserById(userDto.id!!)).willReturn(mockUser01)
+        given(userDao.updateUser(mockUser01)).willReturn(mockUser01)
 
         val result = userService.saveUser(userDto)
 
@@ -127,15 +117,18 @@ class UserServiceTest {
 
     @Test
     fun givenUserExist_whenDeleteUser_thenReturnInt() {
-
-        assertEquals(1, userService.deleteUser(1))
+        given(userDao.getUserById(mockUser01.id!!)).willReturn(mockUser01)
+        given(userDao.deleteUser(mockUser01.id!!)).willReturn(1)
+        assertEquals(1, userService.deleteUser(mockUser01.id!!))
     }
 
     @Test
     fun givenUserNotExist_whenDeleteUser_thenReturnZero() {
 
-        given(userDao.deleteUser(anyInt())).willThrow(UserNotFoundException::class.java)
-        assertThrows<UserNotFoundException> { userService.deleteUser(1) }
+        assertThrows<UserNotFoundException> {
+            userService.deleteUser(1)
+            verify(userService.deleteUser(1), never())
+        }
     }
 
     @Test
@@ -160,15 +153,3 @@ class UserServiceTest {
 
 }
 
-/*
-https://stackoverflow.com/questions/59230041/argumentmatchers-any-must-not-be-null
- */
-object MockitoHelper {
-    fun <T> anyObject(): T {
-        any<T>()
-        return uninitialized()
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    private fun <T> uninitialized(): T = null as T
-}

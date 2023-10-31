@@ -6,24 +6,25 @@ import com.itavgur.otushighload.domain.Gender
 import com.itavgur.otushighload.domain.Hobby
 import com.itavgur.otushighload.domain.User
 import io.swagger.v3.oas.annotations.media.Schema
+import jakarta.validation.constraints.NotBlank
 import java.io.Serializable
 
 @Schema(name = "User", description = "User DTO")
 data class UserDto(
-    @Schema(name = "UserId", required = false)
+    @Schema(name = "id", required = false)
     var id: Int? = null,
-    @Schema(name = "UserFirstName", required = true)
+    @Schema(name = "firstName", required = true)
     val firstName: String,
-    @Schema(name = "UserSecondName", required = true)
+    @Schema(name = "lastName", required = true)
     val lastName: String,
-    @Schema(name = "UserAge", required = true)
+    @Schema(name = "age", required = true)
     val age: Int,
-    @Schema(name = "UserGender", required = true)
+    @Schema(name = "gender", required = true)
     val gender: Gender,
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Schema(name = "City", required = false)
+    @Schema(name = "city", required = false)
     val city: City? = null,
-    @Schema(name = "Hobbies", required = false)
+    @Schema(name = "hobbies", required = false)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     val hobbies: List<Hobby>? = null
 ) : Serializable {
@@ -49,3 +50,17 @@ data class UserDto(
     }
 
 }
+
+@Schema(name = "UserRegistrationRequest", description = "User registration request")
+data class UserRegistrationRequest(
+    @Schema(name = "UserLogin", required = true)
+    var login: String,
+    @Schema(name = "UserPassword", required = true)
+    @field:NotBlank
+    var pass: String,
+    @Schema(name = "UserPassword", required = true)
+    @field:NotBlank
+    var passRepeat: String,
+    @Schema(name = "User", required = true)
+    var user: UserDto
+)

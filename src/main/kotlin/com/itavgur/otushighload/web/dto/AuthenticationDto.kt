@@ -5,15 +5,15 @@ import java.time.LocalDate
 
 @Schema(name = "UserAuthenticationRequest", description = "User authentication request")
 data class AuthenticationDtoRequest(
-    @Schema(name = "UserLogin", required = true)
+    @Schema(name = "login", required = true)
     val login: String,
-    @Schema(name = "UserPassword", required = true)
+    @Schema(name = "pass", required = true)
     val pass: String,
 )
 
 data class AuthenticationDtoResponse(
-    @Schema(name = "BearerToken", required = true)
+    @Schema(name = "token", description = "Bearer token", required = true)
     val token: String,
-    @Schema(name = "TokenLifetime", required = true)
+    @Schema(name = "tokenExpired", description = "Expired data", required = true)
     val tokenExpired: LocalDate
 )
