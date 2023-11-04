@@ -36,5 +36,6 @@ CREATE TABLE credentials
     token         VARCHAR(50),
     token_expired DATE,
     enabled       BOOLEAN            NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id)
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    unique (login)
 );

@@ -3,6 +3,7 @@ package com.itavgur.otushighload.util
 import org.apache.commons.lang3.StringUtils
 import java.sql.ResultSet
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class DBUtil {
 
@@ -33,6 +34,10 @@ class DBUtil {
                 rs.getBoolean(column)
             else
                 null
+        }
+
+        fun getDateTimeValue(column: String, rs: ResultSet): LocalDateTime {
+            return rs.getTimestamp(column).toLocalDateTime()
         }
     }
 }

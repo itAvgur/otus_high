@@ -1,6 +1,5 @@
 package com.itavgur.otushighload.config
 
-import com.itavgur.otushighload.dao.*
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.jdbc.DataSourceBuilder

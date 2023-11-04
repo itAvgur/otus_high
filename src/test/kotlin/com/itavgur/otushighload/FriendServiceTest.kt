@@ -4,12 +4,15 @@ import com.itavgur.otushighload.dao.FriendDao
 import com.itavgur.otushighload.dao.FriendDaoMock
 import com.itavgur.otushighload.domain.*
 import com.itavgur.otushighload.exception.CredentialException
+import com.itavgur.otushighload.exception.InvalidRequestException
 import com.itavgur.otushighload.exception.UserNotFoundException
 import com.itavgur.otushighload.service.CredentialService
 import com.itavgur.otushighload.service.FriendService
+import com.itavgur.otushighload.service.PostService
 import com.itavgur.otushighload.service.UserService
 import com.itavgur.otushighload.web.dto.UserDto
 import org.junit.jupiter.api.Assertions.assertIterableEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
@@ -30,6 +33,9 @@ class FriendServiceTest {
 
     @Mock
     private lateinit var userService: UserService
+
+    @Mock
+    private lateinit var postService: PostService
 
     @InjectMocks
     private lateinit var friendService: FriendService
@@ -60,6 +66,22 @@ class FriendServiceTest {
     private val credential: Credential = Credential(userId = userId, login = "", pass = "", enabled = true)
 
     @Test
+    fun givenValidFriend_whenGetFriend_thenReturnFriend() {
+        val friend = Friend(0, 1, 3)
+        given(credentialService.getCredentialByToken(token)).willReturn(credential)
+        given(friendDao.getFriend(1, 3)).willReturn(friend)
+        assertNotNull(friendService.getFriend(3, token))
+    }
+
+    @Test
+    fun givenFriendNotExist_whenGetFriend_thenThrowException() {
+        given(credentialService.getCredentialByToken(token)).willReturn(credential)
+        assertThrows<InvalidRequestException> {
+            friendService.getFriend(1, token)
+        }
+    }
+
+    @Test
     fun givenValidUsers_whenSaveFriend_thenSaveFriend() {
         given(credentialService.getCredentialByToken(token)).willReturn(credential)
         given(userService.getUser(mockUser02.id!!)).willReturn(UserDto.from(mockUser02))
@@ -78,6 +100,7 @@ class FriendServiceTest {
 
     @Test
     fun givenNotValidFriend_whenSaveFriend_thenThrowException() {
+        given(credentialService.getCredentialByToken(token)).willReturn(credential)
         given(userService.getUser(mockUser02.id!!)).willThrow(UserNotFoundException(""))
         assertThrows<UserNotFoundException> {
             friendService.setFriend(mockUser02.id!!, token)
@@ -111,7 +134,7 @@ class FriendServiceTest {
 
     @Test
     fun givenFriends_whenFindFriends_thenGetIds() {
-        given(friendDao.findFriends(mockUser01.id!!)).willReturn(setOf(mockUser02.id!!, mockUser03.id!!))
+        given(friendDao.findFriendIds(mockUser01.id!!)).willReturn(setOf(mockUser02.id!!, mockUser03.id!!))
         val expected = setOf(mockUser02.id, mockUser03.id)
         assertIterableEquals(expected, friendService.findFriendsOf(mockUser01.id!!))
     }

@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  app:
+    image: ygmelnikov/otus_hl_arm:0.0.5
+    container_name: high_app
+    networks:
+      - otus
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres_db
+      - redis_otus
+    environment:
+      - DB_TYPE=postgres
+      - PG_URL=jdbc:postgresql://postgres_db:5432/otus_high
+
+  postgres_db:
+    image: postgres
+    container_name: postgres_otus
+    networks:
+      - otus
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=otus_high
+    volumes:
+      - ~/pg/data:/data
+
+  redis_otus:
+    image: redis
+    container_name: redis_otus
+    networks:
+      - otus
+    ports:
+      - "6379:6379"
+
+networks:
+  otus:

@@ -6,6 +6,7 @@ plugins {
     id("org.springframework.boot") version "3.1.3"
     id("io.spring.dependency-management") version "1.1.3"
     kotlin("jvm") version "1.9.10"
+    kotlin("plugin.noarg") version "1.9.20"
     kotlin("plugin.spring") version "1.9.10"
     id("org.flywaydb.flyway") version "9.20.1"
     idea
@@ -18,9 +19,13 @@ idea {
     }
 }
 
+noArg {
+    annotation("com.itavgur.otushighload.util.NoArgConstructor")
+}
+
 
 group = "com.itavgur"
-version = "0.0.4"
+version = "0.0.5"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -62,6 +67,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation:$springVersion")
     //web
     implementation("org.springframework.boot:spring-boot-starter-web:$springVersion")
+    //cache
+    implementation("org.springframework.boot:spring-boot-starter-cache:$springVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis:$springVersion")
 
 }
 

@@ -12,13 +12,18 @@ class FriendDaoMock : FriendDao {
         setFriend(2, 1)
     }
 
-    override fun setFriend(userId: Int, friendId: Int) {
+    override fun getFriend(userId: Int, friendId: Int): Friend? {
+        return sqlTable.firstOrNull { it.userId == userId && it.friendId == friendId }
+    }
+
+    override fun setFriend(userId: Int, friendId: Int): Int {
 
         sqlTable.firstOrNull { it.userId == userId && it.friendId == friendId }
             ?: sqlTable.add(
                 Friend(idSequence, userId, friendId)
             )
         ++idSequence
+        return 1
     }
 
     override fun deleteFriend(userId: Int, friendId: Int): Int {
@@ -29,10 +34,14 @@ class FriendDaoMock : FriendDao {
         return filter.size
     }
 
-    override fun findFriends(id: Int): Set<Int> {
+    override fun findFriendIds(id: Int): Set<Int> {
         return sqlTable.filter { it.userId == id }
             .map { it.friendId!! }
             .toSet()
+    }
+
+    override fun findSubscribersOf(id: Int): Set<Int> {
+        TODO("Not yet implemented")
     }
 
 }

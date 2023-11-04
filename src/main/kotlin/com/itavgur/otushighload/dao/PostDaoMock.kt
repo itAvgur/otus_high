@@ -16,32 +16,32 @@ class PostDaoMock : PostDao {
         createPost(mockPost03)
     }
 
-    override fun getPost(id: Int): Post? {
+    override fun getPost(id: Int, userId: Int): Post? {
 
         return sqlTable.firstOrNull { it.id == id }
     }
 
-    override fun createPost(request: Post): Post {
+    override fun createPost(post: Post): Post {
 
-        request.id = idSequence
-        sqlTable.add(request)
+        post.id = idSequence
+        sqlTable.add(post)
         ++idSequence
-        return request.clone()
+        return post.clone()
     }
 
-    override fun updatePost(request: Post): Post {
+    override fun updatePost(post: Post): Post {
 
-        sqlTable.firstOrNull { it.id == request.id }
+        sqlTable.firstOrNull { it.id == post.id }
             ?.let {
                 sqlTable.remove(it)
-                request.authorId = it.authorId
-                sqlTable.add(request)
+                post.authorId = it.authorId
+                sqlTable.add(post)
             }
-        return request.clone()
+        return post.clone()
     }
 
-    override fun deletePost(id: Int): Int {
-        var deletedEntries: Int = 0
+    override fun deletePost(id: Int, userId: Int): Int {
+        var deletedEntries = 0
         sqlTable
             .firstOrNull { it.id == id }
             ?.let {
@@ -51,11 +51,21 @@ class PostDaoMock : PostDao {
         return deletedEntries
     }
 
-    override fun feedPosts(offset: Int, limit: Int, friendIds: Set<Int>): List<Post> {
+    override fun feedPosts(offset: Int, limit: Int?, friendIds: Set<Int>): List<Post> {
 
-        return sqlTable.filter { friendIds.contains(it.authorId) }
-            .drop(offset)
-            .take(limit)
+        return if (limit == null) {
+            sqlTable.filter { friendIds.contains(it.authorId) }
+                .drop(offset)
+        } else {
+            sqlTable.filter { friendIds.contains(it.authorId) }
+                .drop(offset)
+                .take(limit)
+        }
+
+    }
+
+    override fun getPostsByUserId(userId: Int): Set<Post> {
+        TODO("Not yet implemented")
     }
 
 }

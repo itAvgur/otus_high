@@ -7,6 +7,7 @@ import com.itavgur.otushighload.exception.UserNotFoundException
 import com.itavgur.otushighload.web.dto.UserDto
 import com.itavgur.otushighload.web.dto.UserRegistrationRequest
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 
 @Service
@@ -16,7 +17,8 @@ class UserService(
 ) {
 
     companion object {
-        const val USER_ENABLED_DEFAULT: Boolean = true
+        const val USER_ENABLED_DEFAULT = true
+        const val TOP_ACTIVE_USERS_AMOUNT = 500L
     }
 
     fun getUsers(): List<UserDto> = userDao.getUsers().stream()
@@ -90,5 +92,11 @@ class UserService(
             .map { UserDto.from(it) }
             .toList()
     }
+
+    //todo implement statistics later
+    fun getTopActiveUsers(): List<UserDto> = userDao.getUsers().stream()
+        .limit(TOP_ACTIVE_USERS_AMOUNT)
+        .map { UserDto.from(it) }
+        .toList()
 
 }

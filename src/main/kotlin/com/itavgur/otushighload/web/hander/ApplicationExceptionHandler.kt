@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.ResponseStatus
 @ControllerAdvice
 class ApplicationExceptionHandler {
 
+    companion object {
+        val LOG by logger()
+    }
+
     @ExceptionHandler(InvalidRequestException::class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     fun handleInvalidRequestException(
@@ -56,10 +60,6 @@ class ApplicationExceptionHandler {
         LOG.error("Bad API - MethodArgumentNotValidException : ${exception.message}")
         val response = GeneralErrorResponse(HttpStatus.BAD_REQUEST, exception.message, null)
         return ResponseEntity(response, HttpStatus.BAD_REQUEST)
-    }
-
-    companion object {
-        val LOG by logger()
     }
 
     @ExceptionHandler(PostNotFoundException::class)

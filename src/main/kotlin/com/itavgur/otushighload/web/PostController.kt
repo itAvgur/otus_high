@@ -1,6 +1,7 @@
 package com.itavgur.otushighload.web
 
 import com.itavgur.otushighload.aspect.Authenticated
+import com.itavgur.otushighload.service.CredentialService
 import com.itavgur.otushighload.service.PostService
 import com.itavgur.otushighload.web.dto.PostDto
 import io.swagger.v3.oas.annotations.Operation
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/post")
 @Schema(description = "User's post")
 class PostController(
-    @Autowired
-    val postService: PostService
+    @Autowired val postService: PostService,
+    @Autowired val credentialService: CredentialService
 ) {
 
     @Operation(summary = "Get post", description = "Get post by id")
@@ -23,7 +24,10 @@ class PostController(
     fun getPostById(
         @PathVariable(name = "id", required = true) id: Int,
         @RequestParam(name = "token", required = true) token: String
-    ): PostDto = postService.getPost(id, token)
+    ): PostDto {
+        val credential = credentialService.getCredentialByToken(token)
+        return postService.getPost(id, credential.userId!!)
+    }
 
     @Operation(summary = "Create post", description = "Create new post")
     @PostMapping
@@ -31,7 +35,10 @@ class PostController(
     fun createNewPost(
         @Valid @RequestBody request: PostDto,
         @RequestParam(name = "token", required = true) token: String
-    ): PostDto = postService.savePost(request, token)
+    ): PostDto {
+        val credential = credentialService.getCredentialByToken(token)
+        return postService.savePost(request, credential.userId!!)
+    }
 
     @Operation(summary = "Update post", description = "Update post")
     @PutMapping
@@ -39,7 +46,10 @@ class PostController(
     fun updatePost(
         @Valid @RequestBody request: PostDto,
         @RequestParam(name = "token", required = true) token: String
-    ): PostDto = postService.savePost(request, token)
+    ): PostDto {
+        val credential = credentialService.getCredentialByToken(token)
+        return postService.savePost(request, credential.userId!!)
+    }
 
     @Operation(summary = "Delete post", description = "Delete post by id")
     @DeleteMapping("/{id}")
@@ -47,15 +57,21 @@ class PostController(
     fun deleteFriendById(
         @PathVariable(name = "id", required = true) id: Int,
         @RequestParam(name = "token", required = true) token: String
-    ) = postService.deletePost(id, token)
+    ) {
+        val credential = credentialService.getCredentialByToken(token)
+        postService.deletePost(id, credential.userId!!)
+    }
 
     @Operation(summary = "Feed post", description = "Get posts of friends")
     @GetMapping("/feed")
     @Authenticated
     fun feedPost(
-        @RequestParam(name = "offset", defaultValue = "0", required = false) offset: Int,
-        @RequestParam(name = "limit", defaultValue = "10", required = false) limit: Int,
+//todo        @RequestParam(name = "offset", defaultValue = "0", required = false) offset: Int,
+//todo        @RequestParam(name = "limit", required = false) limit: Int?,
         @RequestParam(name = "token", required = true) token: String
-    ): List<PostDto> = postService.feedPosts(offset, limit, token)
+    ): List<PostDto> {
+        val credential = credentialService.getCredentialByToken(token)
+        return postService.feedPosts(userId = credential.userId!!)
+    }
 
 }
