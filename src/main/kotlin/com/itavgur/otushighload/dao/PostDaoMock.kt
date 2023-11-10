@@ -65,7 +65,7 @@ class PostDaoMock : PostDao {
     }
 
     override fun getPostsByUserId(userId: Int): Set<Post> {
-        TODO("Not yet implemented")
+        return sqlTable.filter { it.authorId == userId }.toSet()
     }
 
 }

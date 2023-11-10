@@ -9,20 +9,19 @@
 2) *run application in Docker*
 
    **ARM:**\
-   docker run -d -p 8080:8080 --network otus -e DB_TYPE=postgres ygmelnikov/otus_hl_arm:0.0.4
+   docker run -d -p 8080:8080 --network otus -e DB_TYPE=postgres ygmelnikov/otus_hl_arm:0.0.6
 
    **AMD64:**\
-   docker run -d -p 8080:8080 --network otus -e DB_TYPE=postgres ygmelnikov/otus_hl_amd:0.0.4
+   docker run -d -p 8080:8080 --network otus -e DB_TYPE=postgres ygmelnikov/otus_hl_amd:0.0.6
 
 3) *Postman (newman)*
 
-   newman run high-available.postman_collection.json
+   newman run {collection}
 
 4) *Populate DB*
-   copy (populate.zip) (cities.csv, users.csv) to ~/pg/data
+   untar sql scripts to ~/pg/data
 
    run SQL script:
-
    docker exec -it otus_pg psql otus_high -c "COPY cities FROM '/data/cities.csv' DELIMITER ',' CSV HEADER;" &&
    docker exec -it otus_pg psql otus_high -c "ALTER SEQUENCE cities_id_seq restart with 130;" &&
    docker exec -it otus_pg psql otus_high -c "COPY users FROM '/data/users.csv' DELIMITER ',' CSV HEADER;" &&
@@ -34,7 +33,8 @@
    docker exec -it otus_pg psql otus_high -c "COPY credentials FROM '/data/cred.csv' DELIMITER ',' CSV HEADER;" &&
    docker exec -it otus_pg psql otus_high -c "ALTER SEQUENCE credentials_id_seq restart with 500;"
 
-5) redis
+5) redis\
    docker run -d -p 6379:6379 --name redis_otus --network otus redis
 
-   CLI docker run --network otus --rm -it redis:alpine redis-cli -h redis
+   CLI\
+   docker run --network otus --rm -it redis:alpine redis-cli -h redis

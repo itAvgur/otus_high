@@ -22,6 +22,10 @@ class PostsFeedCacheHandler(
     @Autowired private val userService: UserService
 ) : CacheHandler {
 
+    companion object {
+        const val NAME_OF_CACHE = "post-feed"
+    }
+
     @Value("\${cache.post-feed.warm-on-start:false}")
     private val warmOnStart: Boolean = false
 
@@ -32,7 +36,7 @@ class PostsFeedCacheHandler(
     protected val postFeedEvictQueue: Queue<Int> = LinkedList()
 
     override fun name(): String {
-        return "post-feed"
+        return NAME_OF_CACHE
     }
 
     override fun initCache() {
@@ -69,7 +73,12 @@ class PostsFeedCacheHandler(
 
     override fun getState(): CacheState {
 
-        TODO("Not yet implemented")
+        if (postFeedWarmQueue.isNotEmpty()) return CacheState.WARMING
+
+        if (!warmLock.readLock().tryLock()) return CacheState.WARMING
+
+        warmLock.readLock().unlock()
+        return CacheState.READY
     }
 
     @Component

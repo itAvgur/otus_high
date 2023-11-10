@@ -25,6 +25,11 @@ class MockDBConfig {
     }
 
     @Bean
+    fun messageDao(): MessageDao {
+        return MessageDaoMock()
+    }
+
+    @Bean
     fun credentialDao(): CredentialDao {
         return CredentialDaoMock()
     }

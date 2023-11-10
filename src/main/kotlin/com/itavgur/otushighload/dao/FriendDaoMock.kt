@@ -41,7 +41,9 @@ class FriendDaoMock : FriendDao {
     }
 
     override fun findSubscribersOf(id: Int): Set<Int> {
-        TODO("Not yet implemented")
+        return sqlTable.filter { it.friendId == id }
+            .map { it.friendId!! }
+            .toSet()
     }
 
 }

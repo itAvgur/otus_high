@@ -7,7 +7,6 @@ import com.itavgur.otushighload.exception.UserNotFoundException
 import com.itavgur.otushighload.web.dto.UserDto
 import com.itavgur.otushighload.web.dto.UserRegistrationRequest
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 
 @Service

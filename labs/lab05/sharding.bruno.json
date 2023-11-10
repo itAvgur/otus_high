@@ -1,0 +1,2559 @@
+{
+  "name": "high-available",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "Base",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get user by id- authenticated",
+          "seq": 9,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/get/{{userId}}?token={{userToken}}",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "user",
+                "password": "password"
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "1GogHyGGvpr6p1ifHyD39"
+              },
+              {
+                "name": "res.body.id",
+                "value": "eq {{userId}}",
+                "enabled": true,
+                "uid": "pACPPHxsyIwPO4uDRsJ2s"
+              },
+              {
+                "name": "res.body.firstName",
+                "value": "eq {{firstName}}",
+                "enabled": true,
+                "uid": "Odmm0uhgrNldr0sFfhsws"
+              },
+              {
+                "name": "res.body.lastName",
+                "value": "eq {{lastName}}",
+                "enabled": true,
+                "uid": "8JiwuCrTadYMYAEn14i0p"
+              },
+              {
+                "name": "res.body.age",
+                "value": "eq {{age}}",
+                "enabled": true,
+                "uid": "IGmeiReaXtsnSw5SbrtvR"
+              },
+              {
+                "name": "res.body.gender",
+                "value": "eq {{gender}}",
+                "enabled": true,
+                "uid": "henjkl8l8ZZVrlzfYX60b"
+              },
+              {
+                "name": "res.body.city.name",
+                "value": "eq {{city}}",
+                "enabled": true,
+                "uid": "TwobNB7a1ImJVqIJn2OpE"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get user- no token",
+          "seq": 5,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/get/{{userId}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 401",
+                "enabled": true,
+                "uid": "swOYxGDI4MfY3ZqebXhug"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get user- wrong token",
+          "seq": 6,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/get/{{userId}}?token=wrong_token",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 401",
+                "enabled": true,
+                "uid": "n4JguwDYXwiQXnLkcWxCP"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "wrong_token",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Register user again",
+          "seq": 4,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/register",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"pass\",\n    \"passRepeat\": \"pass\",\n    \"user\": {\n        \"firstName\": \"{{firstName}}\",\n        \"lastName\": \"{{lastName}}\",\n        \"age\": {{age}},\n        \"gender\": \"{{gender}}\",\n        \"city\": {\n            \"name\": \"{{city}}\"\n        }\n    }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 400",
+                "enabled": true,
+                "uid": "XG7Q6nRFrbqvnDilfn8ja"
+              },
+              {
+                "name": "res.body.code",
+                "value": "eq BAD_REQUEST",
+                "enabled": true,
+                "uid": "Wg5d70Y2zFc3LLyOW1ERo"
+              },
+              {
+                "name": "res.body.message",
+                "value": "eq login is already exists",
+                "enabled": true,
+                "uid": "WGY1joOF1wAzUCwdxroe6"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Register user with empty pass",
+          "seq": 1,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/register",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"\",\n    \"passRepeat\": \"\",\n    \"user\": {\n        \"firstName\": \"{{firstName}}\",\n        \"lastName\": \"{{lastName}}\",\n        \"age\": {{age}},\n        \"gender\": \"{{gender}}\",\n        \"city\": {\n            \"name\": \"{{city}}\"\n        }\n    }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "let str = \"login_\" + Math.random().toString().substr(2,5)\nconsole.log(str)\nbru.setEnvVar(\"userLogin\", str)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 400",
+                "enabled": true,
+                "uid": "heLDu3ubEnLZFxIaW5sOj"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Register user with not equal pass",
+          "seq": 2,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/register",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"pass\",\n    \"passRepeat\": \"pass123\",\n    \"user\": {\n        \"firstName\": \"{{firstName}}\",\n        \"lastName\": \"{{lastName}}\",\n        \"age\": {{age}},\n        \"gender\": \"{{gender}}\",\n        \"city\": {\n            \"name\": \"{{city}}\"\n        }\n    }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "let str = \"login_\" + Math.random().toString().substr(2,5)\nconsole.log(str)\nbru.setEnvVar(\"userLogin\", str)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 400",
+                "enabled": true,
+                "uid": "KImbH4wrsEMDql9rHRWu7"
+              },
+              {
+                "name": "res.body.message",
+                "value": "eq passwords must be equal",
+                "enabled": true,
+                "uid": "N2EwqjvUKBXz91JfuJR8P"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Register user",
+          "seq": 3,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/register",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"pass\",\n    \"passRepeat\": \"pass\",\n    \"user\": {\n        \"firstName\": \"{{firstName}}\",\n        \"lastName\": \"{{lastName}}\",\n        \"age\": {{age}},\n        \"gender\": \"{{gender}}\",\n        \"city\": {\n            \"name\": \"{{city}}\"\n        }\n    }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "let str = \"login_\" + Math.random().toString().substr(2,5)\nconsole.log(str)\nbru.setEnvVar(\"userLogin\", str)",
+              "res": "const data = res.getBody();\nbru.setEnvVar(\"userId\", data.id)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "ldDASbDP3hCH9W9Zkxmi5"
+              },
+              {
+                "name": "res.body.id",
+                "value": "isNumber",
+                "enabled": true,
+                "uid": "uQnYTRNHgvbyXs8UQwYQ3"
+              },
+              {
+                "name": "res.body.firstName",
+                "value": "eq {{firstName}}",
+                "enabled": true,
+                "uid": "R35SaxnbO6YNJN86RfPTA"
+              },
+              {
+                "name": "res.body.lastName",
+                "value": "eq {{lastName}}",
+                "enabled": true,
+                "uid": "meC0fswPEfN3wGhcmG7rQ"
+              },
+              {
+                "name": "res.body.age",
+                "value": "eq {{age}}",
+                "enabled": true,
+                "uid": "TmLCCOtnggiO8m5H5kFoO"
+              },
+              {
+                "name": "res.body.gender",
+                "value": "eq {{gender}}",
+                "enabled": true,
+                "uid": "L2upzhTKqK0gzKJ0c7BEy"
+              },
+              {
+                "name": "res.body.city.name",
+                "value": "eq {{city}}",
+                "enabled": true,
+                "uid": "ozFZzA3YzbXyim4nHqwdU"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "authenticate user not valid pass",
+          "seq": 7,
+          "request": {
+            "url": "http://{{host}}:{{port}}/login",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"wrong_pass\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 401",
+                "enabled": true,
+                "uid": "Xs2M8MPoAbOjUny04h2wJ"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "authenticate user",
+          "seq": 8,
+          "request": {
+            "url": "http://{{host}}:{{port}}/login",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"pass\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setEnvVar(\"userToken\", data.token)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "xDaTyrkie3lsJu0uhKcfX"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Caching",
+      "items": [
+        {
+          "type": "http",
+          "name": "Add friend",
+          "seq": 8,
+          "request": {
+            "url": "http://{{host}}:{{port}}/friend/{{friendId}}?token={{userToken}}",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "6TM4gYrWFPX8TEPlZ33qh"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Authenticate friend",
+          "seq": 2,
+          "request": {
+            "url": "http://{{host}}:{{port}}/login",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{friendLogin}}\",\n    \"pass\": \"pass\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setEnvVar(\"friendToken\", data.token)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "8smIfUQ6Q7NAJHqml4aVN"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Authenticate user",
+          "seq": 6,
+          "request": {
+            "url": "http://{{host}}:{{port}}/login",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"pass\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setEnvVar(\"userToken\", data.token)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "Ft0I26G4enn9imMB7miyD"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Create post of friend",
+          "seq": 3,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post?token={{friendToken}}",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"text\": \"Post of friend\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "MOmdBxlYIQe3q5K7wzrIl"
+              },
+              {
+                "name": "res.body.id",
+                "value": "isNumber",
+                "enabled": true,
+                "uid": "7UGAQj11Lcrf668Otk3ti"
+              },
+              {
+                "name": "res.body.text",
+                "value": "eq Post of friend",
+                "enabled": true,
+                "uid": "gzVsduwGq0QPwOosFFSNf"
+              },
+              {
+                "name": "res.body.authorId",
+                "value": "eq {{friendId}}",
+                "enabled": true,
+                "uid": "knFHV6VFh7MHQsHyHl8GQ"
+              }
+            ],
+            "tests": "const data = res.getBody();\nbru.setVar(\"postId\", data.id)",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{friendToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Create post",
+          "seq": 13,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post?token={{userToken}}",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"text\": \"Post of user\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setVar(\"postId\", data.id)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "PUnczUOf3snAmmLzpx7Zu"
+              },
+              {
+                "name": "res.body.id",
+                "value": "isNumber",
+                "enabled": true,
+                "uid": "DvAvEU8ZH5iB3tl6T7IFV"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Delete friend",
+          "seq": 10,
+          "request": {
+            "url": "http://{{host}}:{{port}}/friend/{{friendId}}?token={{userToken}}",
+            "method": "DELETE",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "kuAdI2WyONBqsGvv9KRWK"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Delete post not existed",
+          "seq": 19,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post/{{postId}}?token={{userToken}}",
+            "method": "DELETE",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 400",
+                "enabled": true,
+                "uid": "raF64ZZzzWlCoJ9wMlFru"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Delete post",
+          "seq": 17,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post/{{postId}}?token={{userToken}}",
+            "method": "DELETE",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "X4Lxue0E6tZhVnDUITmCW"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Feed post empty again",
+          "seq": 11,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post/feed?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "Qat8BiI717deVaRMjJm6p"
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 0",
+                "enabled": true,
+                "uid": "tiDrp53yvBiJc8bUfH4e9"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Feed post empty",
+          "seq": 7,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post/feed?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "rWh79j5QlXWqfXPVHbmSz"
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 0",
+                "enabled": true,
+                "uid": "TcWI8nzkCU8rRBAgKB74i"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Feed post",
+          "seq": 9,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post/feed?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "wxncfhMFsSrPZDvMkX7nM"
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 1",
+                "enabled": true,
+                "uid": "YbIAz8qQSxEkqK95gTANc"
+              },
+              {
+                "name": "res.body[0].id",
+                "value": "eq {{postId}}",
+                "enabled": true,
+                "uid": "kFnbxM3RtHV0Lh6iAoucP"
+              },
+              {
+                "name": "res.body[0].text",
+                "value": "eq Post of friend",
+                "enabled": true,
+                "uid": "6GPH073fds6dDEBVTK6Vj"
+              },
+              {
+                "name": "res.body[0].authorId",
+                "value": "eq {{friendId}}",
+                "enabled": true,
+                "uid": "R64Ah4QlyBkERZL9ngg5q"
+              }
+            ],
+            "tests": "// pm.test(\"Status code is 200\", function () {\n//     pm.response.to.have.status(200);\n// });\n// \n// pm.test(\"JSON test\", () => {\n//   const res = pm.response.json();\n//   pm.expect(res.length).to.eql(1);\n//   pm.expect(res[0].id).to.eql(parseInt(pm.collectionVariables.get(\"postId\")));\n//   pm.expect(res[0].authorId).to.eql(parseInt(pm.collectionVariables.get(\"idFriend\")));\n//   pm.expect(res[0].text).to.eql(\"Post of friend\");\n//  });",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "enabled": false
+              },
+              {
+                "name": "limit",
+                "value": "1",
+                "enabled": false
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get post not existed",
+          "seq": 18,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post/2000000?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "// pm.collectionVariables.set(\"postId\", 999999)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 400",
+                "enabled": true,
+                "uid": "LsB5SM6ymquO3sUMtZ7yJ"
+              },
+              {
+                "name": "res.body.message",
+                "value": "eq post with id 2000000 missed",
+                "enabled": true,
+                "uid": "vejMVYAxNbIvleyVGecd7"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get post of friend",
+          "seq": 4,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post/{{postId}}?token={{friendToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "UesTMB9fj8H1EZNmT9RtO"
+              },
+              {
+                "name": "res.body.id",
+                "value": "eq {{postId}}",
+                "enabled": true,
+                "uid": "igsQ85YDCQ3LsIMdpFChI"
+              },
+              {
+                "name": "res.body.text",
+                "value": "eq \"Post of friend\"",
+                "enabled": true,
+                "uid": "73PtXAkWBkhi5CX6jbKGa"
+              },
+              {
+                "name": "res.body.authorId",
+                "value": "eq {{friendId}}",
+                "enabled": true,
+                "uid": "loYP3dYhxSoZsfBIFfGRR"
+              }
+            ],
+            "tests": "\n// pm.test(\"JSON test\", () => {\n//   const res = pm.response.json();;\n//   pm.expect(res.id).to.eql(parseInt(pm.collectionVariables.get(\"postId\")));\n//   pm.expect(res.authorId).to.eql(parseInt(pm.collectionVariables.get(\"idFriend\")));\n//   pm.expect(res.text).to.eql(\"Post of friend\");\n//  });",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{friendToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get post updated",
+          "seq": 16,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post/{{postId}}?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "Yg74DGxRikIBfIUCw0AMp"
+              },
+              {
+                "name": "res.body.id",
+                "value": "eq {{postId}}",
+                "enabled": true,
+                "uid": "KMH3mX5bZirnSKTnGE8Xd"
+              },
+              {
+                "name": "res.body.text",
+                "value": "eq Updated post text",
+                "enabled": true,
+                "uid": "aQ87g21E2mEfm2Jn8ECGg"
+              },
+              {
+                "name": "res.body.authorId",
+                "value": "eq {{userId}}",
+                "enabled": true,
+                "uid": "uXOg2sRQBsJq2MxVEkPt3"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get post",
+          "seq": 14,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post/{{postId}}?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "97frUqHvNNG3XKxfsPqPP"
+              },
+              {
+                "name": "res.body.id",
+                "value": "eq {{postId}}",
+                "enabled": true,
+                "uid": "YUsJSpjPeiXkE2ulNcz54"
+              },
+              {
+                "name": "res.body.text",
+                "value": "eq \"Post of user\"",
+                "enabled": true,
+                "uid": "7tq9SmV9bGLmv09ncCXuW"
+              },
+              {
+                "name": "res.body.authorId",
+                "value": "eq {{userId}}",
+                "enabled": true,
+                "uid": "hkN3NNkJ04t4uEo9hqxWK"
+              }
+            ],
+            "tests": "\n// pm.test(\"JSON test\", () => {\n//   const res = pm.response.json();;\n//   pm.expect(res.id).to.eql(parseInt(pm.collectionVariables.get(\"postId\")));\n//   pm.expect(res.authorId).to.eql(parseInt(pm.collectionVariables.get(\"idFriend\")));\n//   pm.expect(res.text).to.eql(\"Post of friend\");\n//  });",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Register friend",
+          "seq": 1,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/register",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{friendLogin}}\",\n    \"pass\": \"pass\",\n    \"passRepeat\": \"pass\",\n    \"user\": {\n        \"firstName\": \"{{firstName}}\",\n        \"lastName\": \"{{lastName}}\",\n        \"age\": {{age}},\n        \"gender\": \"{{gender}}\",\n        \"city\": {\n            \"name\": \"{{city}}\"\n        }\n    }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "let str = \"login_\" + Math.random().toString().substr(2,5)\nbru.setEnvVar(\"friendLogin\", str)",
+              "res": "const data = res.getBody();\nbru.setEnvVar(\"friendId\", data.id)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "laGWCgAOB0yQz3a3UZ3tp"
+              },
+              {
+                "name": "res.body.id",
+                "value": "isNumber",
+                "enabled": true,
+                "uid": "HXO6LyAkSkP1D4d2Aw1Sj"
+              },
+              {
+                "name": "res.body.firstName",
+                "value": "eq {{firstName}}",
+                "enabled": true,
+                "uid": "fdwhuhzM9R1HvY43DSwzi"
+              },
+              {
+                "name": "res.body.lastName",
+                "value": "eq {{lastName}}",
+                "enabled": true,
+                "uid": "cLcK0qN0brjkebFtkHxU4"
+              },
+              {
+                "name": "res.body.age",
+                "value": "eq {{age}}",
+                "enabled": true,
+                "uid": "MyWIQsENG75jelGCzgvps"
+              },
+              {
+                "name": "res.body.gender",
+                "value": "eq {{gender}}",
+                "enabled": true,
+                "uid": "NdXgprUqbEkkWcGD9s19D"
+              },
+              {
+                "name": "res.body.city.name",
+                "value": "eq {{city}}",
+                "enabled": true,
+                "uid": "dL3trWFHgrHiAt5fbPjSy"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Register user",
+          "seq": 5,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/register",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"pass\",\n    \"passRepeat\": \"pass\",\n    \"user\": {\n        \"firstName\": \"{{firstName}}\",\n        \"lastName\": \"{{lastName}}\",\n        \"age\": {{age}},\n        \"gender\": \"{{gender}}\",\n        \"city\": {\n            \"name\": \"{{city}}\"\n        }\n    }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "let str = \"login_\" + Math.random().toString().substr(2,5)\nconsole.log(str)\nbru.setEnvVar(\"userLogin\", str)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "Yd0mDDrynWIhkY2KajO9J"
+              },
+              {
+                "name": "res.body.id",
+                "value": "isNumber",
+                "enabled": true,
+                "uid": "4hTp8TFm0eVOd6GbmkgeI"
+              },
+              {
+                "name": "res.body.firstName",
+                "value": "eq {{firstName}}",
+                "enabled": true,
+                "uid": "1RYD1aM7J4jJ5BX7aKmow"
+              },
+              {
+                "name": "res.body.lastName",
+                "value": "eq {{lastName}}",
+                "enabled": true,
+                "uid": "w1BCN3wqFMytlNHCCXk55"
+              },
+              {
+                "name": "res.body.age",
+                "value": "eq {{age}}",
+                "enabled": true,
+                "uid": "46FVAve60VVkwk1PwcMr5"
+              },
+              {
+                "name": "res.body.gender",
+                "value": "eq {{gender}}",
+                "enabled": true,
+                "uid": "dasbRw8utMCKHaDxERA9i"
+              },
+              {
+                "name": "res.body.city.name",
+                "value": "eq {{city}}",
+                "enabled": true,
+                "uid": "wLFm1O5pv8o259VuwJxfl"
+              }
+            ],
+            "tests": "const data = res.getBody();\nbru.setVar(\"userId\", data.id)",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Update post not existed",
+          "seq": 12,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post?token={{userToken}}",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"id\": 2000000,\n    \"text\": \"Updated post text\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "// "
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 400",
+                "enabled": true,
+                "uid": "gzBDiSMgJ0wwKttlDT534"
+              },
+              {
+                "name": "res.body.message",
+                "value": "eq post with id 2000000 missed",
+                "enabled": true,
+                "uid": "qMonVY3ksO4ESFpMneSEp"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Update post",
+          "seq": 15,
+          "request": {
+            "url": "http://{{host}}:{{port}}/post?token={{userToken}}",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"id\": {{postId}},\n    \"text\": \"Updated post text\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "dWKAVI86NrzN4SdrRwIDr"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Sharding",
+      "items": [
+        {
+          "type": "http",
+          "name": "Authenticate friend-1",
+          "seq": 4,
+          "request": {
+            "url": "http://{{host}}:{{port}}/login",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{friendLogin}}\",\n    \"pass\": \"pass\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setEnvVar(\"friendToken\", data.token)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "Njsl7bttfRLFtvMQD1oF5"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Authenticate friend-2",
+          "seq": 12,
+          "request": {
+            "url": "http://{{host}}:{{port}}/login",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{friendLogin}}\",\n    \"pass\": \"pass\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setEnvVar(\"friendToken\", data.token)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "PUh5S0zJdXwirxSVRwzpj"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Authenticate user",
+          "seq": 2,
+          "request": {
+            "url": "http://{{host}}:{{port}}/login",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"pass\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setEnvVar(\"userToken\", data.token)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "ZBwK5WhZOCY5xQohFcsi8"
+              }
+            ],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Create message first",
+          "seq": 5,
+          "request": {
+            "url": "http://{{host}}:{{port}}/message?token={{userToken}}",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"to\": \"{{friendLogin}}\",\n    \"text\": \"Message first\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setVar(\"msg01id\", data.id)\nbru.setVar(\"fromId\", data.from)\nbru.setVar(\"toId\", data.to)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "ZevzBZrKyv0ekZO5WXRco"
+              },
+              {
+                "name": "res.body.text",
+                "value": "eq Message first",
+                "enabled": true,
+                "uid": "yUXm32ZEa9ubq8UO1rHsM"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Create message second",
+          "seq": 6,
+          "request": {
+            "url": "http://{{host}}:{{port}}/message?token={{userToken}}",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"to\": \"{{friendLogin}}\",\n    \"text\": \"Message second\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setVar(\"msg02id\", data.id)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "LXS0fIn2oUY9eWH75ViKc"
+              },
+              {
+                "name": "res.body.text",
+                "value": "eq Message second",
+                "enabled": true,
+                "uid": "x0tUuWiUfxaX96J7jgwh6"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Create message third",
+          "seq": 13,
+          "request": {
+            "url": "http://{{host}}:{{port}}/message?token={{friendToken}}",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"to\": \"{{userLogin}}\",\n    \"text\": \"Message third\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "res": "const data = res.getBody();\nbru.setVar(\"msg03id\", data.id)\nbru.setVar(\"fromId\", data.from)\nbru.setVar(\"toId\", data.to)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "gFvQWRpBHvBlWvHUEWJbG"
+              },
+              {
+                "name": "res.body.text",
+                "value": "eq Message third",
+                "enabled": true,
+                "uid": "ZqDP0UQJUELaceIK6AuRY"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{friendToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get message first",
+          "seq": 7,
+          "request": {
+            "url": "http://{{host}}:{{port}}/message/{{msg01id}}?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "BzBIKEVbJEcXjRSfbn75P"
+              },
+              {
+                "name": "res.body.text",
+                "value": "eq Message first",
+                "enabled": true,
+                "uid": "bJmbI9qXJ3WYiRbob6wa4"
+              },
+              {
+                "name": "res.body.from",
+                "value": "eq {{fromId}}",
+                "enabled": true,
+                "uid": "s6NqbmWm7bDsnpT07GDXd"
+              },
+              {
+                "name": "res.body.to",
+                "value": "eq {{toId}}",
+                "enabled": true,
+                "uid": "PCsJLwXjJIgqQ2Mka8Bw3"
+              }
+            ],
+            "tests": "// pm.test(\"Status code is 200\", function () {\n//     pm.response.to.have.status(200);\n// });\n// \n// pm.test(\"JSON test\", () => {\n//   const res = pm.response.json();\n//   pm.expect(res.id).to.eql(parseInt(pm.collectionVariables.get(\"messageFirstId\")));\n//   pm.expect(res.from).to.eql(parseInt(pm.collectionVariables.get(\"id\")));\n//   pm.expect(res.to).to.eql(parseInt(pm.collectionVariables.get(\"idFriend\")));\n//   pm.expect(res.text).to.eql(\"Message first\");\n//  });",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get message second",
+          "seq": 8,
+          "request": {
+            "url": "http://{{host}}:{{port}}/message/{{msg02id}}?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "9tjVRJtSI9c3B4kKcftxq"
+              },
+              {
+                "name": "res.body.text",
+                "value": "eq Message second",
+                "enabled": true,
+                "uid": "F9Bn9gUrUUoomdlbAcZKF"
+              },
+              {
+                "name": "res.body.from",
+                "value": "eq {{fromId}}",
+                "enabled": true,
+                "uid": "zVLf89eRRbcH10PyPojGf"
+              },
+              {
+                "name": "res.body.to",
+                "value": "eq {{toId}}",
+                "enabled": true,
+                "uid": "CmnfYkOtt8mTb9q6Dy805"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get messages for friend-1",
+          "seq": 10,
+          "request": {
+            "url": "http://{{host}}:{{port}}/message/list?token={{friendToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "// "
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "waVybpMM12pAdOpOpzPRi"
+              },
+              {
+                "name": "res.body[0].id",
+                "value": "eq {{msg01id}}",
+                "enabled": true,
+                "uid": "lNoCpOlfpCNSxKnRxhRXp"
+              },
+              {
+                "name": "res.body[0].text",
+                "value": "eq Message first",
+                "enabled": true,
+                "uid": "GRtfzdwhUt9PSalqHGTE7"
+              },
+              {
+                "name": "res.body[0].from",
+                "value": "eq {{fromId}}",
+                "enabled": true,
+                "uid": "vBFMeXsgS9hRoHrpGhqkI"
+              },
+              {
+                "name": "res.body[0].to",
+                "value": "eq {{toId}}",
+                "enabled": true,
+                "uid": "4VTWNkb1nZwKukvqSNoVx"
+              },
+              {
+                "name": "res.body[1].id",
+                "value": "eq {{msg02id}}",
+                "enabled": true,
+                "uid": "uGfiHZeU3tOE1riagHGUB"
+              },
+              {
+                "name": "res.body[1].text",
+                "value": "eq Message second",
+                "enabled": true,
+                "uid": "FN0Ys7iv7eUgTJZ8ByLzU"
+              },
+              {
+                "name": "res.body[1].from",
+                "value": "eq {{fromId}}",
+                "enabled": true,
+                "uid": "2d0hd1KOpWlaupo7Kca3F"
+              },
+              {
+                "name": "res.body[1].to",
+                "value": "eq {{toId}}",
+                "enabled": true,
+                "uid": "tXoGjvloqPhfP15xNIDrd"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{friendToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get messages for friend-2",
+          "seq": 14,
+          "request": {
+            "url": "http://{{host}}:{{port}}/message/list?token={{friendToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "// "
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "GKeWW9RmCjMjpf7JmtzVb"
+              },
+              {
+                "name": "res.body[0].id",
+                "value": "eq {{msg03id}}",
+                "enabled": true,
+                "uid": "c0MBM8g9Qcdu6GDNBNVtx"
+              },
+              {
+                "name": "res.body[0].text",
+                "value": "eq Message third",
+                "enabled": true,
+                "uid": "npBEIJEPEKwKog79frGdP"
+              },
+              {
+                "name": "res.body[0].from",
+                "value": "eq {{fromId}}",
+                "enabled": true,
+                "uid": "8W7d5GsMWIaQCvu5SOWEn"
+              },
+              {
+                "name": "res.body[0].to",
+                "value": "eq {{toId}}",
+                "enabled": true,
+                "uid": "U3rzSOWaU7enCIYDdhE5n"
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 1",
+                "enabled": true,
+                "uid": "ue62dJTjPkHTewD9BbPxG"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{friendToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get messages for user with third msg",
+          "seq": 15,
+          "request": {
+            "url": "http://{{host}}:{{port}}/message/list?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "// "
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "kyMcIJQvVyCle0c2zN5DI"
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 3",
+                "enabled": true,
+                "uid": "BYxnty0VSi27NRbFq9N0S"
+              },
+              {
+                "name": "res.body[2].text",
+                "value": "eq Message third",
+                "enabled": true,
+                "uid": "zNynezoK9YzfIMjSa3ZSI"
+              },
+              {
+                "name": "res.body[2].from",
+                "value": "eq {{fromId}}",
+                "enabled": true,
+                "uid": "tUq7nrmCF148RLjTA4xQO"
+              },
+              {
+                "name": "res.body[2].to",
+                "value": "eq {{toId}}",
+                "enabled": true,
+                "uid": "niikSwmvrFdPnMqPMSzbT"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get messages for user",
+          "seq": 9,
+          "request": {
+            "url": "http://{{host}}:{{port}}/message/list?token={{userToken}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "// "
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "UyqIn6ddUj1PYTxZsMve6"
+              },
+              {
+                "name": "res.body[0].id",
+                "value": "eq {{msg01id}}",
+                "enabled": true,
+                "uid": "ZetaHJJDmvfyNQxnp6B3h"
+              },
+              {
+                "name": "res.body[0].text",
+                "value": "eq Message first",
+                "enabled": true,
+                "uid": "Nvo3gZrw0RA74Zvfx7pqK"
+              },
+              {
+                "name": "res.body[0].from",
+                "value": "eq {{fromId}}",
+                "enabled": true,
+                "uid": "fatbWQgeTtSlLsgN35U66"
+              },
+              {
+                "name": "res.body[0].to",
+                "value": "eq {{toId}}",
+                "enabled": true,
+                "uid": "qEgIRD0KZMZ26ID9CQuJb"
+              },
+              {
+                "name": "res.body[1].id",
+                "value": "eq {{msg02id}}",
+                "enabled": true,
+                "uid": "9kW4BFmcIuh2gZMG3V3rd"
+              },
+              {
+                "name": "res.body[1].text",
+                "value": "eq Message second",
+                "enabled": true,
+                "uid": "9hpi0pVVvQM1fDvrJPY9E"
+              },
+              {
+                "name": "res.body[1].from",
+                "value": "eq {{fromId}}",
+                "enabled": true,
+                "uid": "hVd54vkIwWyxBC3qdXB4Y"
+              },
+              {
+                "name": "res.body[1].to",
+                "value": "eq {{toId}}",
+                "enabled": true,
+                "uid": "Q6emv1XihJs4JPF8nwO3i"
+              }
+            ],
+            "tests": "",
+            "query": [
+              {
+                "name": "token",
+                "value": "{{userToken}}",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Register friend-1",
+          "seq": 3,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/register",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{friendLogin}}\",\n    \"pass\": \"pass\",\n    \"passRepeat\": \"pass\",\n    \"user\": {\n        \"firstName\": \"{{firstName}}\",\n        \"lastName\": \"{{lastName}}\",\n        \"age\": {{age}},\n        \"gender\": \"{{gender}}\",\n        \"city\": {\n            \"name\": \"{{city}}\"\n        }\n    }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "let str = \"login_\" + Math.random().toString().substr(2,5)\nconsole.log(str)\nbru.setEnvVar(\"friendLogin\", str)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "G7rf7znBD7bgmiCZSDqPl"
+              },
+              {
+                "name": "res.body.id",
+                "value": "isNumber",
+                "enabled": true,
+                "uid": "fAjX7qYq7j7ROQqQNvXAS"
+              },
+              {
+                "name": "res.body.firstName",
+                "value": "eq {{firstName}}",
+                "enabled": true,
+                "uid": "YNRCA9KazjjVj3J9ELOJ9"
+              },
+              {
+                "name": "res.body.lastName",
+                "value": "eq {{lastName}}",
+                "enabled": true,
+                "uid": "ZsuPnHLg0wkbJipS0LhcT"
+              },
+              {
+                "name": "res.body.age",
+                "value": "eq {{age}}",
+                "enabled": true,
+                "uid": "XzBPqqtmPRSE21vrl4gJu"
+              },
+              {
+                "name": "res.body.gender",
+                "value": "eq {{gender}}",
+                "enabled": true,
+                "uid": "JBdsrcz8OTq9smNd5pqPi"
+              },
+              {
+                "name": "res.body.city.name",
+                "value": "eq {{city}}",
+                "enabled": true,
+                "uid": "UJLumUB5azQQaOPcrFOsY"
+              }
+            ],
+            "tests": "const data = res.getBody();\nbru.setEnvVar(\"userId\", data.id)",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Register friend-2",
+          "seq": 11,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/register",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{friendLogin}}\",\n    \"pass\": \"pass\",\n    \"passRepeat\": \"pass\",\n    \"user\": {\n        \"firstName\": \"{{firstName}}\",\n        \"lastName\": \"{{lastName}}\",\n        \"age\": {{age}},\n        \"gender\": \"{{gender}}\",\n        \"city\": {\n            \"name\": \"{{city}}\"\n        }\n    }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "let str = \"login_\" + Math.random().toString().substr(2,5)\nconsole.log(str)\nbru.setEnvVar(\"friendLogin\", str)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "seRtB5R2tQ27w7AlZby3P"
+              },
+              {
+                "name": "res.body.id",
+                "value": "isNumber",
+                "enabled": true,
+                "uid": "h5dhNhwxfWHqbHEI63bZc"
+              },
+              {
+                "name": "res.body.firstName",
+                "value": "eq {{firstName}}",
+                "enabled": true,
+                "uid": "NEnrq0AKnxUus1GW63Ovk"
+              },
+              {
+                "name": "res.body.lastName",
+                "value": "eq {{lastName}}",
+                "enabled": true,
+                "uid": "ir2LE3gHiZGKmZmqLeQ1i"
+              },
+              {
+                "name": "res.body.age",
+                "value": "eq {{age}}",
+                "enabled": true,
+                "uid": "yoevwMfyo7A7x9rCi3f4a"
+              },
+              {
+                "name": "res.body.gender",
+                "value": "eq {{gender}}",
+                "enabled": true,
+                "uid": "o7iEOJIAeTcGJX9kDcxPC"
+              },
+              {
+                "name": "res.body.city.name",
+                "value": "eq {{city}}",
+                "enabled": true,
+                "uid": "ygAlWASoNjTSErlALryid"
+              }
+            ],
+            "tests": "const data = res.getBody();\nbru.setEnvVar(\"userId\", data.id)",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Register user",
+          "seq": 1,
+          "request": {
+            "url": "http://{{host}}:{{port}}/user/register",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"login\": \"{{userLogin}}\",\n    \"pass\": \"pass\",\n    \"passRepeat\": \"pass\",\n    \"user\": {\n        \"firstName\": \"{{firstName}}\",\n        \"lastName\": \"{{lastName}}\",\n        \"age\": {{age}},\n        \"gender\": \"{{gender}}\",\n        \"city\": {\n            \"name\": \"{{city}}\"\n        }\n    }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {
+              "req": "let str = \"login_\" + Math.random().toString().substr(2,5)\nconsole.log(str)\nbru.setEnvVar(\"userLogin\", str)"
+            },
+            "vars": {},
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true,
+                "uid": "MDGdYOHsOVukpfvNoULiU"
+              },
+              {
+                "name": "res.body.id",
+                "value": "isNumber",
+                "enabled": true,
+                "uid": "DMfCkEcVO5OKdXji0GoE1"
+              },
+              {
+                "name": "res.body.firstName",
+                "value": "eq {{firstName}}",
+                "enabled": true,
+                "uid": "BlCMbLqKT5gYW0G66qsNN"
+              },
+              {
+                "name": "res.body.lastName",
+                "value": "eq {{lastName}}",
+                "enabled": true,
+                "uid": "4w3QEgI7DERWwcyuswnn0"
+              },
+              {
+                "name": "res.body.age",
+                "value": "eq {{age}}",
+                "enabled": true,
+                "uid": "jz4rPNmwkjZBGXZG8G6Wh"
+              },
+              {
+                "name": "res.body.gender",
+                "value": "eq {{gender}}",
+                "enabled": true,
+                "uid": "1c0KEH79xP2ej5aEAVXuM"
+              },
+              {
+                "name": "res.body.city.name",
+                "value": "eq {{city}}",
+                "enabled": true,
+                "uid": "e4VWFfxyzsQYbGvZVG9i2"
+              }
+            ],
+            "tests": "const data = res.getBody();\nbru.setEnvVar(\"userId\", data.id)",
+            "query": []
+          }
+        }
+      ]
+    }
+  ],
+  "activeEnvironmentUid": "lUPptq6887M9BwbL3XTZd",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "host",
+          "value": "localhost",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "port",
+          "value": "8080",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "firstName",
+          "value": "Yury",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "lastName",
+          "value": "Melnikov",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "age",
+          "value": "43",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "city",
+          "value": "IKT",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "gender",
+          "value": "MALE",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "userId",
+          "value": 1000063,
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "friendId",
+          "value": 1000059,
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "userLogin",
+          "value": "login_92959",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "friendLogin",
+          "value": "login_96076",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "userToken",
+          "value": "f8de5db4-a0b3-4098-b219-119a21f28a61",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "friendToken",
+          "value": "1a23219a-cb3f-4575-b7e8-9c9e36e3b808",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "otus_local"
+    }
+  ]
+}

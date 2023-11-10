@@ -1,9 +1,6 @@
 package com.itavgur.otushighload.web.hander
 
-import com.itavgur.otushighload.exception.CredentialException
-import com.itavgur.otushighload.exception.InvalidRequestException
-import com.itavgur.otushighload.exception.PostNotFoundException
-import com.itavgur.otushighload.exception.UserNotFoundException
+import com.itavgur.otushighload.exception.*
 import com.itavgur.otushighload.util.logger
 import com.itavgur.otushighload.web.dto.GeneralErrorResponse
 import jakarta.servlet.http.HttpServletRequest
@@ -19,6 +16,17 @@ class ApplicationExceptionHandler {
 
     companion object {
         val LOG by logger()
+    }
+
+    @ExceptionHandler(NotImplementedError::class)
+    @ResponseStatus(value = HttpStatus.NOT_IMPLEMENTED)
+    fun handleNotImplementedError(
+        req: HttpServletRequest,
+        exception: NotImplementedError
+    ): ResponseEntity<Any> {
+        LOG.error("Bad API - NotImplementedError : ${exception.message}")
+        val response = GeneralErrorResponse(HttpStatus.NOT_IMPLEMENTED, exception.message, null)
+        return ResponseEntity(response, HttpStatus.BAD_REQUEST)
     }
 
     @ExceptionHandler(InvalidRequestException::class)
@@ -80,6 +88,17 @@ class ApplicationExceptionHandler {
         exception: UserNotFoundException
     ): ResponseEntity<Any> {
         LOG.error("Bad API - UserNotFoundException : ${exception.message}")
+        val response = GeneralErrorResponse(HttpStatus.BAD_REQUEST, exception.message, null)
+        return ResponseEntity(response, HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(MessageNotFoundException::class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    fun handleMessageNotFoundException(
+        req: HttpServletRequest,
+        exception: MessageNotFoundException
+    ): ResponseEntity<Any> {
+        LOG.error("Bad API - MessageNotFoundException : ${exception.message}")
         val response = GeneralErrorResponse(HttpStatus.BAD_REQUEST, exception.message, null)
         return ResponseEntity(response, HttpStatus.BAD_REQUEST)
     }
