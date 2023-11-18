@@ -19,25 +19,25 @@ class PostDaoPostgres(
 ) : PostDao {
     companion object {
 
-        const val QUERY_GET_POST_BY_ID = """SELECT id ,text, author_id,status,created,updated
-                FROM posts WHERE id=:postId AND author_id = :userId"""
+        const val QUERY_GET_POST_BY_ID = """SELECT id ,text, user_id,status,created,updated
+                FROM posts WHERE id=:postId AND user_id = :userId"""
 
         const val QUERY_GET_POSTS_OF_FRIENDS =
-            """SELECT id,text,author_id,status,created,updated 
-                FROM posts WHERE author_id IN (:friendIds) OFFSET :offset """
+            """SELECT id,text,user_id,status,created,updated 
+                FROM posts WHERE user_id IN (:friendIds) OFFSET :offset """
 
-        const val QUERY_GET_POSTS_OF_FRIENDS_LIMITED = """SELECT id,text,author_id,status,created,updated FROM posts 
-                WHERE author_id IN (:friendIds) 
+        const val QUERY_GET_POSTS_OF_FRIENDS_LIMITED = """SELECT id,text,user_id,status,created,updated FROM posts 
+                WHERE user_id IN (:friendIds) 
                 ORDER BY updated DESC 
                 OFFSET :offset LIMIT :limit """
 
         const val QUERY_INSERT_POST =
-            """INSERT INTO posts (text, author_id, status, created, updated) VALUES (:text, :author_id, :status, :created, :updated)"""
+            """INSERT INTO posts (text, user_id, status, created, updated) VALUES (:text, :user_id, :status, :created, :updated)"""
 
         const val QUERY_UPDATE_POST =
-            """UPDATE posts SET text=:text,updated=:updated WHERE id=:postId AND author_id=:user_id"""
+            """UPDATE posts SET text=:text,updated=:updated WHERE id=:postId AND user_id=:user_id"""
 
-        const val QUERY_DELETE_POST = """DELETE FROM posts WHERE id = :postId AND author_id=:userId"""
+        const val QUERY_DELETE_POST = """DELETE FROM posts WHERE id = :postId AND user_id=:userId"""
     }
 
     class PostRowMapper : RowMapper<Post> {
@@ -46,7 +46,7 @@ class PostDaoPostgres(
             return Post(
                 id = DBUtil.getIntValue("id", rs),
                 text = DBUtil.getStringValue("text", rs)!!,
-                authorId = DBUtil.getIntValue("author_id", rs),
+                authorId = DBUtil.getIntValue("user_id", rs),
                 status = DBUtil.getStringValue("status", rs)!!,
                 created = DBUtil.getDateTimeValue("created", rs),
                 updated = DBUtil.getDateTimeValue("created", rs),
@@ -67,7 +67,7 @@ class PostDaoPostgres(
 
         val map = MapSqlParameterSource(
             mapOf(
-                "text" to post.text, "author_id" to post.authorId, "status" to post.status,
+                "text" to post.text, "user_id" to post.authorId, "status" to post.status,
                 "created" to post.created, "updated" to post.updated
             )
         )

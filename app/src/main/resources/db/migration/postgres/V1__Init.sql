@@ -1,6 +1,3 @@
-DROP SCHEMA IF EXISTS otus_high CASCADE;
-CREATE SCHEMA otus_high;
-
 CREATE TABLE cities
 (
     id   SERIAL PRIMARY KEY NOT NULL,
@@ -9,7 +6,7 @@ CREATE TABLE cities
 
 CREATE TABLE users
 (
-    id         SERIAL PRIMARY KEY NOT NULL,
+    user_id    SERIAL PRIMARY KEY NOT NULL,
     first_name VARCHAR(100)       NOT NULL,
     last_name  VARCHAR(100)       NOT NULL,
     age        INT                NOT NULL,
@@ -20,22 +17,24 @@ CREATE TABLE users
 
 CREATE TABLE hobbies
 (
-    id          SERIAL PRIMARY KEY NOT NULL,
-    user_id     INT                NOT NULL,
-    name        VARCHAR(40)        NOT NULL,
+    id          SERIAL      NOT NULL,
+    user_id     INT         NOT NULL,
+    name        VARCHAR(40) NOT NULL,
     description VARCHAR(255),
-    FOREIGN KEY (user_id) REFERENCES users (id)
+    PRIMARY KEY (id, user_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE credentials
 (
-    id            SERIAL PRIMARY KEY NOT NULL,
-    user_id       INT                NOT NULL,
-    login         VARCHAR(100)       NOT NULL,
-    pass          VARCHAR(100)       NOT NULL,
+    id            SERIAL       NOT NULL,
+    user_id       INT          NOT NULL,
+    login         VARCHAR(100) NOT NULL,
+    pass          VARCHAR(100) NOT NULL,
     token         VARCHAR(50),
     token_expired DATE,
-    enabled       BOOLEAN            NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    unique (login)
+    enabled       BOOLEAN      NOT NULL,
+    PRIMARY KEY (id, user_id, login),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+
 );

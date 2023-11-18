@@ -20,7 +20,10 @@ class CacheManagerController(
     @Autowired val cacheManagerService: CacheManagerService
 ) {
 
-    @Operation(summary = "Get status of the cache", description = "Return 200 if ready, 202 otherwise")
+    @Operation(
+        summary = "Get status of the cache",
+        description = "Return 200 if ready, 202 otherwise"
+    )
     @GetMapping("/ready")
     fun getCacheState(@RequestBody(required = true) request: CacheManagerRequest): ResponseEntity<CacheState> =
         ResponseEntity(cacheManagerService.getCacheState(request), HttpStatus.OK)
@@ -29,6 +32,7 @@ class CacheManagerController(
     @Operation(
         summary = "Start warming caches",
         description = "Warming cache, return 200 if started, 202 otherwise",
+        tags = ["cache"],
         hidden = true
     )
     fun warmCache(@RequestBody(required = true) request: CacheManagerRequest): ResponseEntity<HttpStatus> {
@@ -40,7 +44,7 @@ class CacheManagerController(
 
     }
 
-    @Operation(summary = "Evict cache", description = "Evict cache", hidden = true)
+    @Operation(summary = "Evict cache", description = "Evict cache", tags = ["cache"], hidden = true)
     @PostMapping("/evict")
     fun deleteFriendById(
         @RequestBody(required = true) request: CacheManagerRequest

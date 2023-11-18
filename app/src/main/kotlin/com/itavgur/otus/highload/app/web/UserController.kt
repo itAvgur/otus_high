@@ -16,12 +16,12 @@ class UserController(
     val userService: UserService
 ) {
 
-    @Operation(summary = "Register user", description = "Register user")
+    @Operation(summary = "Register user", description = "Register user", tags = ["user"])
     @PostMapping("/register")
     fun register(@Valid @RequestBody request: UserRegistrationRequest): UserDto =
         userService.registerUser(request)
 
-    @Operation(summary = "Get user by id", description = "Get user by id")
+    @Operation(summary = "Get user by id", description = "Get user by id", tags = ["user"])
     @GetMapping("/get/{id}")
     @Authenticated
     fun getById(
@@ -29,11 +29,15 @@ class UserController(
         @RequestParam(name = "token", required = false) token: String? = null
     ): UserDto = userService.getUser(id)
 
-    @Operation(summary = "Get all users", description = "Get all users")
+    @Operation(summary = "Get all users", description = "Get all users", tags = ["user"])
     @GetMapping("/get/all")
     fun getAll(): List<UserDto> = userService.getUsers()
 
-    @Operation(summary = "Search users by first/last name", description = "Search users by first and last name")
+    @Operation(
+        summary = "Search users by first/last name",
+        description = "Search users by first and last name",
+        tags = ["user"]
+    )
     @GetMapping("/search")
     fun searchUsers(
         @RequestParam(name = "firstName", required = false) firstName: String?,

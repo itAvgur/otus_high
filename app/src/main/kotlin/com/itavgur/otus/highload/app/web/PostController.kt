@@ -18,7 +18,7 @@ class PostController(
     @Autowired val credentialService: CredentialService
 ) {
 
-    @Operation(summary = "Get post", description = "Get post by id")
+    @Operation(summary = "Get post", description = "Get post by id", tags = ["post"])
     @GetMapping("/{id}")
     @Authenticated
     fun getPostById(
@@ -29,7 +29,7 @@ class PostController(
         return postService.getPost(id, credential.userId!!)
     }
 
-    @Operation(summary = "Create post", description = "Create new post")
+    @Operation(summary = "Create post", description = "Create new post", tags = ["post"])
     @PostMapping
     @Authenticated
     fun createNewPost(
@@ -40,7 +40,7 @@ class PostController(
         return postService.savePost(request, credential.userId!!)
     }
 
-    @Operation(summary = "Update post", description = "Update post")
+    @Operation(summary = "Update post", description = "Update post", tags = ["post"])
     @PutMapping
     @Authenticated
     fun updatePost(
@@ -51,7 +51,7 @@ class PostController(
         return postService.savePost(request, credential.userId!!)
     }
 
-    @Operation(summary = "Delete post", description = "Delete post by id")
+    @Operation(summary = "Delete post", description = "Delete post by id", tags = ["post"])
     @DeleteMapping("/{id}")
     @Authenticated
     fun deleteFriendById(
@@ -62,7 +62,7 @@ class PostController(
         postService.deletePost(id, credential.userId!!)
     }
 
-    @Operation(summary = "Feed post", description = "Get posts of friends")
+    @Operation(summary = "Feed post", description = "Get posts of friends", tags = ["post"])
     @GetMapping("/feed")
     @Authenticated
     fun feedPost(

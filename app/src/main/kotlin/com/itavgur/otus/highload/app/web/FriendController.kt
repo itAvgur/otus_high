@@ -14,7 +14,7 @@ class FriendController(
     @Autowired val credentialService: CredentialService
 ) {
 
-    @Operation(summary = "Set friend", description = "Set new friend")
+    @Operation(summary = "Set friend", description = "Set new friend", tags = ["friend"])
     @PutMapping("/{friendId}")
     @Authenticated
     fun addFriend(
@@ -25,7 +25,7 @@ class FriendController(
         friendService.setFriend(friendId, token)
     }
 
-    @Operation(summary = "Delete friend", description = "Delete friend by id")
+    @Operation(summary = "Delete friend", description = "Delete friend by id", tags = ["friend"])
     @DeleteMapping("/{friendId}")
     @Authenticated
     fun deleteFriendById(

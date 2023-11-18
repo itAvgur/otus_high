@@ -16,5 +16,4 @@ curl --location 'http://localhost:8080/manage/cache/warm' --header 'Content-Type
    newman run cache.postman.json
 
 3) redis cli \
-
-4) docker run --network lab04_otus --rm -it redis:alpine redis-cli -h redis_otus
+   docker run --network lab04_otus --rm -it redis:alpine redis-cli -h redis_otus

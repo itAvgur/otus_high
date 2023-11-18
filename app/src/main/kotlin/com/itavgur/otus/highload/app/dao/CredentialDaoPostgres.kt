@@ -3,6 +3,7 @@ package com.itavgur.otus.highload.app.dao
 import com.itavgur.otus.highload.app.config.PostgresDBConfig
 import com.itavgur.otus.highload.app.domain.Credential
 import com.itavgur.otus.highload.app.util.DBUtil
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
@@ -17,7 +18,11 @@ class CredentialDaoPostgres(
     private val namedParameterJdbcTemplate: NamedParameterJdbcTemplate,
 ) : CredentialDao {
 
+
     companion object {
+
+        @Value("\${db.postgres.schema}")
+        private val schema: String = "app"
 
         const val QUERY_CREDENTIAL_BY_ID =
             """SELECT cred.id ,cred.user_id, cred.login, cred.pass, cred.token, cred.token_expired, cred.enabled

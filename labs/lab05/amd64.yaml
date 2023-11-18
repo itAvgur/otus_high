@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  app:
+      image: ygmelnikov/otus_hl_arm:0.0.6
+      container_name: high_app
+      networks:
+        - otus
+      ports:
+        - "8080:8080"
+      depends_on:
+        - master
+      environment:
+        - DB_TYPE=postgres
+        - PG_URL=jdbc:postgresql://${COMPOSE_PROJECT_NAME:-citus}_master:5432/otus_high
+  master:
+    container_name: "${COMPOSE_PROJECT_NAME:-citus}_master"
+    image: "citusdata/citus:12.0.0"
+    ports: [ "${COORDINATOR_EXTERNAL_PORT:-5432}:5432" ]
+    labels: [ "com.citusdata.role=Master" ]
+    environment: &AUTH
+      POSTGRES_USER: "${POSTGRES_USER:-root}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-root}"
+      POSTGRES_DB: "${POSTGRES_DB:-otus_high}"
+      PGUSER: "${POSTGRES_USER:-root}"
+      PGPASSWORD: "${POSTGRES_PASSWORD:-root}"
+      POSTGRES_HOST_AUTH_METHOD: "${POSTGRES_HOST_AUTH_METHOD:-trust}"
+    networks:
+      - otus
+    volumes:
+      - ~/pg/data:/data
+  worker:
+    image: "citusdata/citus:12.0.0"
+    labels: [ "com.citusdata.role=Worker" ]
+    depends_on: [ citus_manager ]
+    environment: *AUTH
+    command: "/wait-for-manager.sh"
+    volumes:
+      - healthcheck-volume:/healthcheck
+    networks:
+      - otus
+  citus_manager:
+    container_name: "${COMPOSE_PROJECT_NAME:-citus}_manager"
+    image: "citusdata/membership-manager:0.3.0"
+    volumes:
+      - "${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock"
+      - healthcheck-volume:/healthcheck
+    depends_on: [ master ]
+    environment: *AUTH
+    networks:
+      - otus
+volumes:
+  healthcheck-volume:
+networks:
+  otus:

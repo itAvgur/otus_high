@@ -18,7 +18,7 @@ class MessageController(
 ) {
 
     @Authenticated
-    @Operation(summary = "Get message", description = "Get message by id")
+    @Operation(summary = "Get message", description = "Get message by id", tags = ["message"])
     @GetMapping("/{id}")
     fun getMessageById(
         @PathVariable(name = "id", required = true) id: Int,
@@ -29,7 +29,7 @@ class MessageController(
     }
 
     @Authenticated
-    @Operation(summary = "Get messages", description = "Get all messages")
+    @Operation(summary = "Get messages", description = "Get all messages", tags = ["message"])
     @GetMapping("/list")
     fun getMessages(
         @RequestParam(name = "token", required = true) token: String
@@ -39,7 +39,7 @@ class MessageController(
     }
 
     @Authenticated
-    @Operation(summary = "Create message", description = "Create message")
+    @Operation(summary = "Create message", description = "Create message", tags = ["message"])
     @PostMapping
     fun createNewMessage(
         @Valid @RequestBody request: MessageRequestDto,

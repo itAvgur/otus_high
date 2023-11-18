@@ -17,7 +17,11 @@ class LoginController(
     @Autowired val credentialService: CredentialService
 ) {
 
-    @Operation(summary = "Authenticate user", description = "Authenticate user by login/password, get bearer token")
+    @Operation(
+        summary = "Authenticate user",
+        description = "Authenticate user by login/password, get bearer token",
+        tags = ["user"]
+    )
     @PostMapping
     fun authenticate(@Valid @RequestBody authenticationDto: AuthenticationDtoRequest): AuthenticationDtoResponse =
         credentialService.authenticate(authenticationDto)

@@ -28,13 +28,13 @@ class UserDaoPostgres(
     companion object {
 
         const val QUERY_GET_ALL_USERS =
-            """SELECT users.id ,users.first_name, users.last_name, users.age,users.gender, c.id as city_id, c.name as city_name
+            """SELECT users.user_id ,users.first_name, users.last_name, users.age,users.gender, c.id as city_id, c.name as city_name
                 FROM users JOIN cities c on c.id = users.city_id"""
 
         const val QUERY_GET_USER_BY_ID =
-            """SELECT users.id ,users.first_name, users.last_name, users.age,users.gender, c.id as city_id, c.name as city_name
+            """SELECT users.user_id ,users.first_name, users.last_name, users.age,users.gender, c.id as city_id, c.name as city_name
                 FROM users JOIN cities c on c.id = users.city_id
-                WHERE users.id = :userId"""
+                WHERE users.user_id = :userId"""
 
         const val QUERY_INSERT_USER =
             """INSERT INTO users (first_name, last_name, age, gender, city_id)
@@ -43,10 +43,10 @@ class UserDaoPostgres(
         const val QUERY_UPDATE_USER =
             """UPDATE users
                 SET first_name = :firstName, last_name = :lastName, age = :age, gender = :gender, city_id = :cityId
-                WHERE users.id = :id"""
+                WHERE users.user_id = :id"""
 
         const val QUERY_SEARCH_USERS_BY_FIRST_AND_LAST_NAME =
-            """SELECT users.id ,users.first_name, users.last_name, users.age,users.gender, c.id as city_id, c.name as city_name
+            """SELECT users.user_id ,users.first_name, users.last_name, users.age,users.gender, c.id as city_id, c.name as city_name
                 FROM users JOIN cities c on c.id = users.city_id
                 WHERE users.first_name LIKE :firstName AND users.last_name LIKE :lastName
                 """
@@ -64,7 +64,7 @@ class UserDaoPostgres(
         override fun mapRow(rs: ResultSet, rowNum: Int): User {
 
             return User(
-                id = getIntValue("id", rs),
+                id = getIntValue("user_id", rs),
                 firstName = getStringValue("first_name", rs)!!,
                 lastName = getStringValue("last_name", rs)!!,
                 age = getIntValue("age", rs)!!,
@@ -99,7 +99,7 @@ class UserDaoPostgres(
         )
         val generatedKeyHolder = GeneratedKeyHolder()
         namedParameterJdbcTemplate.update(QUERY_INSERT_USER, map, generatedKeyHolder)
-        user.id = generatedKeyHolder.keyList.first()["id"] as Int?
+        user.id = generatedKeyHolder.keyList.first()["user_id"] as Int?
 
         return user
     }

@@ -42,43 +42,43 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "1GogHyGGvpr6p1ifHyD39"
+                "uid": "sOBziBzIOGPBMGCcmWLhD"
               },
               {
                 "name": "res.body.id",
                 "value": "eq {{userId}}",
                 "enabled": true,
-                "uid": "pACPPHxsyIwPO4uDRsJ2s"
+                "uid": "A2WlvjmWiK3hTJm3DJw11"
               },
               {
                 "name": "res.body.firstName",
                 "value": "eq {{firstName}}",
                 "enabled": true,
-                "uid": "Odmm0uhgrNldr0sFfhsws"
+                "uid": "vhF9jfhovAdRazwBv1sw9"
               },
               {
                 "name": "res.body.lastName",
                 "value": "eq {{lastName}}",
                 "enabled": true,
-                "uid": "8JiwuCrTadYMYAEn14i0p"
+                "uid": "vnRD5L4lrFiutbH2B0vPH"
               },
               {
                 "name": "res.body.age",
                 "value": "eq {{age}}",
                 "enabled": true,
-                "uid": "IGmeiReaXtsnSw5SbrtvR"
+                "uid": "Ckrt7B6jjkZQD4FjaIxYk"
               },
               {
                 "name": "res.body.gender",
                 "value": "eq {{gender}}",
                 "enabled": true,
-                "uid": "henjkl8l8ZZVrlzfYX60b"
+                "uid": "42waZmdB8MxlfiLRllguM"
               },
               {
                 "name": "res.body.city.name",
                 "value": "eq {{city}}",
                 "enabled": true,
-                "uid": "TwobNB7a1ImJVqIJn2OpE"
+                "uid": "CTieNqSGx0WBjbZR5cwoa"
               }
             ],
             "tests": "",
@@ -121,7 +121,7 @@
                 "name": "res.status",
                 "value": "eq 401",
                 "enabled": true,
-                "uid": "swOYxGDI4MfY3ZqebXhug"
+                "uid": "7KUx1jxBI1l5d2AI9Uu4y"
               }
             ],
             "tests": "",
@@ -158,7 +158,7 @@
                 "name": "res.status",
                 "value": "eq 401",
                 "enabled": true,
-                "uid": "n4JguwDYXwiQXnLkcWxCP"
+                "uid": "uT5CVEFs6GcAMvwi478mM"
               }
             ],
             "tests": "",
@@ -202,19 +202,19 @@
                 "name": "res.status",
                 "value": "eq 400",
                 "enabled": true,
-                "uid": "XG7Q6nRFrbqvnDilfn8ja"
+                "uid": "aLxXpOYsKvJh2DQOG2Q9x"
               },
               {
                 "name": "res.body.code",
                 "value": "eq BAD_REQUEST",
                 "enabled": true,
-                "uid": "Wg5d70Y2zFc3LLyOW1ERo"
+                "uid": "bQoyuw50f2837rEv8izTU"
               },
               {
                 "name": "res.body.message",
                 "value": "eq login is already exists",
                 "enabled": true,
-                "uid": "WGY1joOF1wAzUCwdxroe6"
+                "uid": "5mpNJeqZI2t1QcEV7mGjX"
               }
             ],
             "tests": "",
@@ -254,7 +254,7 @@
                 "name": "res.status",
                 "value": "eq 400",
                 "enabled": true,
-                "uid": "heLDu3ubEnLZFxIaW5sOj"
+                "uid": "A1ZXHozTWDZ3WQbwGZai2"
               }
             ],
             "tests": "",
@@ -294,13 +294,13 @@
                 "name": "res.status",
                 "value": "eq 400",
                 "enabled": true,
-                "uid": "KImbH4wrsEMDql9rHRWu7"
+                "uid": "4kRpaT0JleWcLAri0hl4R"
               },
               {
                 "name": "res.body.message",
                 "value": "eq passwords must be equal",
                 "enabled": true,
-                "uid": "N2EwqjvUKBXz91JfuJR8P"
+                "uid": "rPAk3vfCzkIR1teif2jrl"
               }
             ],
             "tests": "",
@@ -341,43 +341,43 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "ldDASbDP3hCH9W9Zkxmi5"
+                "uid": "wwVRsQSt2AFzBI8PCyWQ5"
               },
               {
                 "name": "res.body.id",
                 "value": "isNumber",
                 "enabled": true,
-                "uid": "uQnYTRNHgvbyXs8UQwYQ3"
+                "uid": "SygJqBQ0seFezDzJRZ3Xh"
               },
               {
                 "name": "res.body.firstName",
                 "value": "eq {{firstName}}",
                 "enabled": true,
-                "uid": "R35SaxnbO6YNJN86RfPTA"
+                "uid": "0M2pemECeUlofctLvgqPE"
               },
               {
                 "name": "res.body.lastName",
                 "value": "eq {{lastName}}",
                 "enabled": true,
-                "uid": "meC0fswPEfN3wGhcmG7rQ"
+                "uid": "61wleNMmUUanyDBeK6IDX"
               },
               {
                 "name": "res.body.age",
                 "value": "eq {{age}}",
                 "enabled": true,
-                "uid": "TmLCCOtnggiO8m5H5kFoO"
+                "uid": "zYIksRkSRcsfssjW0tBlw"
               },
               {
                 "name": "res.body.gender",
                 "value": "eq {{gender}}",
                 "enabled": true,
-                "uid": "L2upzhTKqK0gzKJ0c7BEy"
+                "uid": "WGqM5I55nxMq3qJOfkIL4"
               },
               {
                 "name": "res.body.city.name",
                 "value": "eq {{city}}",
                 "enabled": true,
-                "uid": "ozFZzA3YzbXyim4nHqwdU"
+                "uid": "SSgBY0OSMvCyzXDhn0HSn"
               }
             ],
             "tests": "",
@@ -415,7 +415,7 @@
                 "name": "res.status",
                 "value": "eq 401",
                 "enabled": true,
-                "uid": "Xs2M8MPoAbOjUny04h2wJ"
+                "uid": "zxloASXl0Ygr0A815d2hC"
               }
             ],
             "tests": "",
@@ -455,7 +455,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "xDaTyrkie3lsJu0uhKcfX"
+                "uid": "1DUJWnzwUylFfO2poxdBJ"
               }
             ],
             "tests": "",
@@ -498,7 +498,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "6TM4gYrWFPX8TEPlZ33qh"
+                "uid": "uFXaVTCryoD2bNWG75F0E"
               }
             ],
             "tests": "",
@@ -544,7 +544,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "8smIfUQ6Q7NAJHqml4aVN"
+                "uid": "JUCPnhikKNnQO0aoBnGyC"
               }
             ],
             "tests": "",
@@ -584,7 +584,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "Ft0I26G4enn9imMB7miyD"
+                "uid": "EScicD4vGEhdncKxrvA9Y"
               }
             ],
             "tests": "",
@@ -622,25 +622,25 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "MOmdBxlYIQe3q5K7wzrIl"
+                "uid": "ZWgmECeR1ceiAUxgUSQNl"
               },
               {
                 "name": "res.body.id",
                 "value": "isNumber",
                 "enabled": true,
-                "uid": "7UGAQj11Lcrf668Otk3ti"
+                "uid": "2Oi5y0pISDJcQjRmQoAtj"
               },
               {
                 "name": "res.body.text",
                 "value": "eq Post of friend",
                 "enabled": true,
-                "uid": "gzVsduwGq0QPwOosFFSNf"
+                "uid": "r9ZzaoRgD4jL5f5q8MerI"
               },
               {
                 "name": "res.body.authorId",
                 "value": "eq {{friendId}}",
                 "enabled": true,
-                "uid": "knFHV6VFh7MHQsHyHl8GQ"
+                "uid": "oTnuZKu9Ia6eSDp5vWxeG"
               }
             ],
             "tests": "const data = res.getBody();\nbru.setVar(\"postId\", data.id)",
@@ -686,13 +686,13 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "PUnczUOf3snAmmLzpx7Zu"
+                "uid": "nYK0d29n1ZXMq4dv0yNzJ"
               },
               {
                 "name": "res.body.id",
                 "value": "isNumber",
                 "enabled": true,
-                "uid": "DvAvEU8ZH5iB3tl6T7IFV"
+                "uid": "8iqwuIEVwSOelKhIa9TDr"
               }
             ],
             "tests": "",
@@ -735,7 +735,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "kuAdI2WyONBqsGvv9KRWK"
+                "uid": "MFOOoVfF0YFzZ8llujYpc"
               }
             ],
             "tests": "",
@@ -778,7 +778,7 @@
                 "name": "res.status",
                 "value": "eq 400",
                 "enabled": true,
-                "uid": "raF64ZZzzWlCoJ9wMlFru"
+                "uid": "K8Mz05a3bFFPej36gRUyk"
               }
             ],
             "tests": "",
@@ -821,7 +821,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "X4Lxue0E6tZhVnDUITmCW"
+                "uid": "nsnRbVD2KVphvthGcTLLB"
               }
             ],
             "tests": "",
@@ -864,13 +864,13 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "Qat8BiI717deVaRMjJm6p"
+                "uid": "BJphlUil31J2NE2FygmF6"
               },
               {
                 "name": "res.body.length",
                 "value": "eq 0",
                 "enabled": true,
-                "uid": "tiDrp53yvBiJc8bUfH4e9"
+                "uid": "MS8uxva50DVxhZe9D5F1V"
               }
             ],
             "tests": "",
@@ -913,13 +913,13 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "rWh79j5QlXWqfXPVHbmSz"
+                "uid": "b3LBiudYIyKpuCjVxz8vE"
               },
               {
                 "name": "res.body.length",
                 "value": "eq 0",
                 "enabled": true,
-                "uid": "TcWI8nzkCU8rRBAgKB74i"
+                "uid": "hecmfv8wWerN3Q55tOVxZ"
               }
             ],
             "tests": "",
@@ -962,31 +962,31 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "wxncfhMFsSrPZDvMkX7nM"
+                "uid": "Tq2xe54psKrCbHBzoGkYb"
               },
               {
                 "name": "res.body.length",
                 "value": "eq 1",
                 "enabled": true,
-                "uid": "YbIAz8qQSxEkqK95gTANc"
+                "uid": "3IPKLLFvnqEEIqiyhVzKH"
               },
               {
                 "name": "res.body[0].id",
                 "value": "eq {{postId}}",
                 "enabled": true,
-                "uid": "kFnbxM3RtHV0Lh6iAoucP"
+                "uid": "gwgPmQdaFqwdTJKTnYRw2"
               },
               {
                 "name": "res.body[0].text",
                 "value": "eq Post of friend",
                 "enabled": true,
-                "uid": "6GPH073fds6dDEBVTK6Vj"
+                "uid": "SqTdb3SSITtSYpIbiuIqe"
               },
               {
                 "name": "res.body[0].authorId",
                 "value": "eq {{friendId}}",
                 "enabled": true,
-                "uid": "R64Ah4QlyBkERZL9ngg5q"
+                "uid": "tvkokXQDgUOZVWgzia1EW"
               }
             ],
             "tests": "// pm.test(\"Status code is 200\", function () {\n//     pm.response.to.have.status(200);\n// });\n// \n// pm.test(\"JSON test\", () => {\n//   const res = pm.response.json();\n//   pm.expect(res.length).to.eql(1);\n//   pm.expect(res[0].id).to.eql(parseInt(pm.collectionVariables.get(\"postId\")));\n//   pm.expect(res[0].authorId).to.eql(parseInt(pm.collectionVariables.get(\"idFriend\")));\n//   pm.expect(res[0].text).to.eql(\"Post of friend\");\n//  });",
@@ -1041,13 +1041,13 @@
                 "name": "res.status",
                 "value": "eq 400",
                 "enabled": true,
-                "uid": "LsB5SM6ymquO3sUMtZ7yJ"
+                "uid": "qcwmffOGopBmI8UzPW4T4"
               },
               {
                 "name": "res.body.message",
                 "value": "eq post with id 2000000 missed",
                 "enabled": true,
-                "uid": "vejMVYAxNbIvleyVGecd7"
+                "uid": "B9eIKr8Vlel0lkBptHkRq"
               }
             ],
             "tests": "",
@@ -1090,25 +1090,25 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "UesTMB9fj8H1EZNmT9RtO"
+                "uid": "DafNlXD7EF5sWui3SOrMj"
               },
               {
                 "name": "res.body.id",
                 "value": "eq {{postId}}",
                 "enabled": true,
-                "uid": "igsQ85YDCQ3LsIMdpFChI"
+                "uid": "Hu3MUaiurIGRzge5RlYl0"
               },
               {
                 "name": "res.body.text",
                 "value": "eq \"Post of friend\"",
                 "enabled": true,
-                "uid": "73PtXAkWBkhi5CX6jbKGa"
+                "uid": "Xs7VpnPc0sFxmCpCppDl3"
               },
               {
                 "name": "res.body.authorId",
                 "value": "eq {{friendId}}",
                 "enabled": true,
-                "uid": "loYP3dYhxSoZsfBIFfGRR"
+                "uid": "u8yyWlCeht5xYbkUyUSV2"
               }
             ],
             "tests": "\n// pm.test(\"JSON test\", () => {\n//   const res = pm.response.json();;\n//   pm.expect(res.id).to.eql(parseInt(pm.collectionVariables.get(\"postId\")));\n//   pm.expect(res.authorId).to.eql(parseInt(pm.collectionVariables.get(\"idFriend\")));\n//   pm.expect(res.text).to.eql(\"Post of friend\");\n//  });",
@@ -1151,25 +1151,25 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "Yg74DGxRikIBfIUCw0AMp"
+                "uid": "8n8dRLAaLHHpuufIOWKxw"
               },
               {
                 "name": "res.body.id",
                 "value": "eq {{postId}}",
                 "enabled": true,
-                "uid": "KMH3mX5bZirnSKTnGE8Xd"
+                "uid": "jfVb8gusoAA1flrwAMtxO"
               },
               {
                 "name": "res.body.text",
                 "value": "eq Updated post text",
                 "enabled": true,
-                "uid": "aQ87g21E2mEfm2Jn8ECGg"
+                "uid": "kLNVCYHy0QjZwvHe8gl7L"
               },
               {
                 "name": "res.body.authorId",
                 "value": "eq {{userId}}",
                 "enabled": true,
-                "uid": "uXOg2sRQBsJq2MxVEkPt3"
+                "uid": "RvblMlOQbSI6iArJSlRSV"
               }
             ],
             "tests": "",
@@ -1212,25 +1212,25 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "97frUqHvNNG3XKxfsPqPP"
+                "uid": "pDREcE5CMJYQmb96fJtsO"
               },
               {
                 "name": "res.body.id",
                 "value": "eq {{postId}}",
                 "enabled": true,
-                "uid": "YUsJSpjPeiXkE2ulNcz54"
+                "uid": "c0H5tD4IQhMklPMvJGvlZ"
               },
               {
                 "name": "res.body.text",
                 "value": "eq \"Post of user\"",
                 "enabled": true,
-                "uid": "7tq9SmV9bGLmv09ncCXuW"
+                "uid": "qSZlRkXPx7avO8IiEL1gD"
               },
               {
                 "name": "res.body.authorId",
                 "value": "eq {{userId}}",
                 "enabled": true,
-                "uid": "hkN3NNkJ04t4uEo9hqxWK"
+                "uid": "nijr0b6O8yWBbkmhh9bYS"
               }
             ],
             "tests": "\n// pm.test(\"JSON test\", () => {\n//   const res = pm.response.json();;\n//   pm.expect(res.id).to.eql(parseInt(pm.collectionVariables.get(\"postId\")));\n//   pm.expect(res.authorId).to.eql(parseInt(pm.collectionVariables.get(\"idFriend\")));\n//   pm.expect(res.text).to.eql(\"Post of friend\");\n//  });",
@@ -1277,43 +1277,43 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "laGWCgAOB0yQz3a3UZ3tp"
+                "uid": "qUuGoZE6Ryjmf67GazbVI"
               },
               {
                 "name": "res.body.id",
                 "value": "isNumber",
                 "enabled": true,
-                "uid": "HXO6LyAkSkP1D4d2Aw1Sj"
+                "uid": "XQD17lPXUN7mA0YWAUtRf"
               },
               {
                 "name": "res.body.firstName",
                 "value": "eq {{firstName}}",
                 "enabled": true,
-                "uid": "fdwhuhzM9R1HvY43DSwzi"
+                "uid": "F5dDHlp8X3PwDQcdzfW4Y"
               },
               {
                 "name": "res.body.lastName",
                 "value": "eq {{lastName}}",
                 "enabled": true,
-                "uid": "cLcK0qN0brjkebFtkHxU4"
+                "uid": "QTDKUE77GsBlVZhx9hsrZ"
               },
               {
                 "name": "res.body.age",
                 "value": "eq {{age}}",
                 "enabled": true,
-                "uid": "MyWIQsENG75jelGCzgvps"
+                "uid": "5EpUa2uP9dEFjqfj53uCG"
               },
               {
                 "name": "res.body.gender",
                 "value": "eq {{gender}}",
                 "enabled": true,
-                "uid": "NdXgprUqbEkkWcGD9s19D"
+                "uid": "HqVqCGWHz6n1n7VLTWIVe"
               },
               {
                 "name": "res.body.city.name",
                 "value": "eq {{city}}",
                 "enabled": true,
-                "uid": "dL3trWFHgrHiAt5fbPjSy"
+                "uid": "qDVwbwI1vJQWO8arEF8hI"
               }
             ],
             "tests": "",
@@ -1353,43 +1353,43 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "Yd0mDDrynWIhkY2KajO9J"
+                "uid": "oILkBQH0PNikYsgYgpT0J"
               },
               {
                 "name": "res.body.id",
                 "value": "isNumber",
                 "enabled": true,
-                "uid": "4hTp8TFm0eVOd6GbmkgeI"
+                "uid": "QFpvrYQl0eIsFkJXJTAX2"
               },
               {
                 "name": "res.body.firstName",
                 "value": "eq {{firstName}}",
                 "enabled": true,
-                "uid": "1RYD1aM7J4jJ5BX7aKmow"
+                "uid": "bvM3hFDH1Xa3BOh2OiTgV"
               },
               {
                 "name": "res.body.lastName",
                 "value": "eq {{lastName}}",
                 "enabled": true,
-                "uid": "w1BCN3wqFMytlNHCCXk55"
+                "uid": "7YKAsO9TZzsU1tJagSS4a"
               },
               {
                 "name": "res.body.age",
                 "value": "eq {{age}}",
                 "enabled": true,
-                "uid": "46FVAve60VVkwk1PwcMr5"
+                "uid": "GlQNEJLLAbAy5qv0tflF2"
               },
               {
                 "name": "res.body.gender",
                 "value": "eq {{gender}}",
                 "enabled": true,
-                "uid": "dasbRw8utMCKHaDxERA9i"
+                "uid": "m930egl8U6kv3X3zC7DRx"
               },
               {
                 "name": "res.body.city.name",
                 "value": "eq {{city}}",
                 "enabled": true,
-                "uid": "wLFm1O5pv8o259VuwJxfl"
+                "uid": "kXictWKsHBL274gSSMYCQ"
               }
             ],
             "tests": "const data = res.getBody();\nbru.setVar(\"userId\", data.id)",
@@ -1429,13 +1429,13 @@
                 "name": "res.status",
                 "value": "eq 400",
                 "enabled": true,
-                "uid": "gzBDiSMgJ0wwKttlDT534"
+                "uid": "nrRHO6U2eAFLVQwRZpShj"
               },
               {
                 "name": "res.body.message",
                 "value": "eq post with id 2000000 missed",
                 "enabled": true,
-                "uid": "qMonVY3ksO4ESFpMneSEp"
+                "uid": "OBEIZfsuWDp9G7zkrRyXJ"
               }
             ],
             "tests": "",
@@ -1479,7 +1479,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "dWKAVI86NrzN4SdrRwIDr"
+                "uid": "jjeyBdqm0qFVLLSpNjNon"
               }
             ],
             "tests": "",
@@ -1531,7 +1531,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "Njsl7bttfRLFtvMQD1oF5"
+                "uid": "DD1XrUcKUyHQSYgB5GJHb"
               }
             ],
             "tests": "",
@@ -1571,7 +1571,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "PUh5S0zJdXwirxSVRwzpj"
+                "uid": "mjjXpsObRltIto7tA6MR5"
               }
             ],
             "tests": "",
@@ -1611,7 +1611,7 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "ZBwK5WhZOCY5xQohFcsi8"
+                "uid": "56tpzA2ZWuJWRexfgKQoX"
               }
             ],
             "tests": "",
@@ -1651,13 +1651,13 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "ZevzBZrKyv0ekZO5WXRco"
+                "uid": "waXo3NDLpBrVNu4B5kifI"
               },
               {
                 "name": "res.body.text",
                 "value": "eq Message first",
                 "enabled": true,
-                "uid": "yUXm32ZEa9ubq8UO1rHsM"
+                "uid": "QyIA1nbKkdMOlm05ZqDo1"
               }
             ],
             "tests": "",
@@ -1703,13 +1703,13 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "LXS0fIn2oUY9eWH75ViKc"
+                "uid": "fwt6LUuQ06Ms6m48K0l5x"
               },
               {
                 "name": "res.body.text",
                 "value": "eq Message second",
                 "enabled": true,
-                "uid": "x0tUuWiUfxaX96J7jgwh6"
+                "uid": "OjBdVTQitXtUaimbc8Xpj"
               }
             ],
             "tests": "",
@@ -1755,13 +1755,13 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "gFvQWRpBHvBlWvHUEWJbG"
+                "uid": "dXM9n2BJNlGHWCJKbfFik"
               },
               {
                 "name": "res.body.text",
                 "value": "eq Message third",
                 "enabled": true,
-                "uid": "ZqDP0UQJUELaceIK6AuRY"
+                "uid": "hZXely2RDllQ4IcjhsJZr"
               }
             ],
             "tests": "",
@@ -1804,25 +1804,25 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "BzBIKEVbJEcXjRSfbn75P"
+                "uid": "zWUaBF66cHHOUHVXuTHBo"
               },
               {
                 "name": "res.body.text",
                 "value": "eq Message first",
                 "enabled": true,
-                "uid": "bJmbI9qXJ3WYiRbob6wa4"
+                "uid": "3DaCZy3BLAbuBjjF5VUO4"
               },
               {
                 "name": "res.body.from",
                 "value": "eq {{fromId}}",
                 "enabled": true,
-                "uid": "s6NqbmWm7bDsnpT07GDXd"
+                "uid": "ZVy11BwkSk5Is4ZZykqrm"
               },
               {
                 "name": "res.body.to",
                 "value": "eq {{toId}}",
                 "enabled": true,
-                "uid": "PCsJLwXjJIgqQ2Mka8Bw3"
+                "uid": "j1OefXhdJ3A4cmFS2LpS5"
               }
             ],
             "tests": "// pm.test(\"Status code is 200\", function () {\n//     pm.response.to.have.status(200);\n// });\n// \n// pm.test(\"JSON test\", () => {\n//   const res = pm.response.json();\n//   pm.expect(res.id).to.eql(parseInt(pm.collectionVariables.get(\"messageFirstId\")));\n//   pm.expect(res.from).to.eql(parseInt(pm.collectionVariables.get(\"id\")));\n//   pm.expect(res.to).to.eql(parseInt(pm.collectionVariables.get(\"idFriend\")));\n//   pm.expect(res.text).to.eql(\"Message first\");\n//  });",
@@ -1865,25 +1865,25 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "9tjVRJtSI9c3B4kKcftxq"
+                "uid": "uvtRRW7SGh6iRnoyBnbM9"
               },
               {
                 "name": "res.body.text",
                 "value": "eq Message second",
                 "enabled": true,
-                "uid": "F9Bn9gUrUUoomdlbAcZKF"
+                "uid": "NSSc73l0vu4sV7wvSrLTt"
               },
               {
                 "name": "res.body.from",
                 "value": "eq {{fromId}}",
                 "enabled": true,
-                "uid": "zVLf89eRRbcH10PyPojGf"
+                "uid": "IgR0K8qDpvevwLMH4xxIC"
               },
               {
                 "name": "res.body.to",
                 "value": "eq {{toId}}",
                 "enabled": true,
-                "uid": "CmnfYkOtt8mTb9q6Dy805"
+                "uid": "x2JjyivRaChVTxXeeWFeD"
               }
             ],
             "tests": "",
@@ -1928,55 +1928,55 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "waVybpMM12pAdOpOpzPRi"
+                "uid": "j0OfoqmVsVotGSCPlXwVk"
               },
               {
                 "name": "res.body[0].id",
                 "value": "eq {{msg01id}}",
                 "enabled": true,
-                "uid": "lNoCpOlfpCNSxKnRxhRXp"
+                "uid": "Xq24h8tzt7BAKXbR7lZsz"
               },
               {
                 "name": "res.body[0].text",
                 "value": "eq Message first",
                 "enabled": true,
-                "uid": "GRtfzdwhUt9PSalqHGTE7"
+                "uid": "A4ry3MIXV9L9lcXN08KY5"
               },
               {
                 "name": "res.body[0].from",
                 "value": "eq {{fromId}}",
                 "enabled": true,
-                "uid": "vBFMeXsgS9hRoHrpGhqkI"
+                "uid": "YHg2oGZJNqiUh1hv3xbDw"
               },
               {
                 "name": "res.body[0].to",
                 "value": "eq {{toId}}",
                 "enabled": true,
-                "uid": "4VTWNkb1nZwKukvqSNoVx"
+                "uid": "9Undf1Vc0x53Al3AdZZJa"
               },
               {
                 "name": "res.body[1].id",
                 "value": "eq {{msg02id}}",
                 "enabled": true,
-                "uid": "uGfiHZeU3tOE1riagHGUB"
+                "uid": "FBS5XgKZQa4nDknydZrKd"
               },
               {
                 "name": "res.body[1].text",
                 "value": "eq Message second",
                 "enabled": true,
-                "uid": "FN0Ys7iv7eUgTJZ8ByLzU"
+                "uid": "CIsc9fvgUocNEeQtTjp0a"
               },
               {
                 "name": "res.body[1].from",
                 "value": "eq {{fromId}}",
                 "enabled": true,
-                "uid": "2d0hd1KOpWlaupo7Kca3F"
+                "uid": "gH3e5r7R1GaavE4XI31Vo"
               },
               {
                 "name": "res.body[1].to",
                 "value": "eq {{toId}}",
                 "enabled": true,
-                "uid": "tXoGjvloqPhfP15xNIDrd"
+                "uid": "9f3waqBiTWBYeop4vFNzJ"
               }
             ],
             "tests": "",
@@ -2021,37 +2021,37 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "GKeWW9RmCjMjpf7JmtzVb"
+                "uid": "jRvyOGFOmEqo9yWAWagZK"
               },
               {
                 "name": "res.body[0].id",
                 "value": "eq {{msg03id}}",
                 "enabled": true,
-                "uid": "c0MBM8g9Qcdu6GDNBNVtx"
+                "uid": "9bQkDZrxTzT9pGTcTDRsV"
               },
               {
                 "name": "res.body[0].text",
                 "value": "eq Message third",
                 "enabled": true,
-                "uid": "npBEIJEPEKwKog79frGdP"
+                "uid": "3lQJXlX1MbUcGg4E3tBBr"
               },
               {
                 "name": "res.body[0].from",
                 "value": "eq {{fromId}}",
                 "enabled": true,
-                "uid": "8W7d5GsMWIaQCvu5SOWEn"
+                "uid": "dCPxDoyEn0dLf9PI3ZOk3"
               },
               {
                 "name": "res.body[0].to",
                 "value": "eq {{toId}}",
                 "enabled": true,
-                "uid": "U3rzSOWaU7enCIYDdhE5n"
+                "uid": "uOMECpFjhD3Js4Ah5UC4c"
               },
               {
                 "name": "res.body.length",
                 "value": "eq 1",
                 "enabled": true,
-                "uid": "ue62dJTjPkHTewD9BbPxG"
+                "uid": "nHvlA0eLCxsrm80hKFLNP"
               }
             ],
             "tests": "",
@@ -2096,31 +2096,31 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "kyMcIJQvVyCle0c2zN5DI"
+                "uid": "baJ9fmetAeNkPZZJPTPKv"
               },
               {
                 "name": "res.body.length",
                 "value": "eq 3",
                 "enabled": true,
-                "uid": "BYxnty0VSi27NRbFq9N0S"
+                "uid": "FOuchXKgUiYu1vYl7f4hm"
               },
               {
                 "name": "res.body[2].text",
                 "value": "eq Message third",
                 "enabled": true,
-                "uid": "zNynezoK9YzfIMjSa3ZSI"
+                "uid": "5XyDzqRi0K8yJhB2r7fAD"
               },
               {
                 "name": "res.body[2].from",
                 "value": "eq {{fromId}}",
                 "enabled": true,
-                "uid": "tUq7nrmCF148RLjTA4xQO"
+                "uid": "XenYTVLk1C5WnMc4O85gd"
               },
               {
                 "name": "res.body[2].to",
                 "value": "eq {{toId}}",
                 "enabled": true,
-                "uid": "niikSwmvrFdPnMqPMSzbT"
+                "uid": "cX66AzOB9mMxAThF2Km1f"
               }
             ],
             "tests": "",
@@ -2165,55 +2165,55 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "UyqIn6ddUj1PYTxZsMve6"
+                "uid": "CWoR14bzi9hF5BCM24SZk"
               },
               {
                 "name": "res.body[0].id",
                 "value": "eq {{msg01id}}",
                 "enabled": true,
-                "uid": "ZetaHJJDmvfyNQxnp6B3h"
+                "uid": "7MDtVEwxBFyYIW8UK55wo"
               },
               {
                 "name": "res.body[0].text",
                 "value": "eq Message first",
                 "enabled": true,
-                "uid": "Nvo3gZrw0RA74Zvfx7pqK"
+                "uid": "2sdSql26woBWCSH0mBSCx"
               },
               {
                 "name": "res.body[0].from",
                 "value": "eq {{fromId}}",
                 "enabled": true,
-                "uid": "fatbWQgeTtSlLsgN35U66"
+                "uid": "A7SPAPvYUoKpWBFudcypX"
               },
               {
                 "name": "res.body[0].to",
                 "value": "eq {{toId}}",
                 "enabled": true,
-                "uid": "qEgIRD0KZMZ26ID9CQuJb"
+                "uid": "tkS4fItfOw5PhJHPGt2yq"
               },
               {
                 "name": "res.body[1].id",
                 "value": "eq {{msg02id}}",
                 "enabled": true,
-                "uid": "9kW4BFmcIuh2gZMG3V3rd"
+                "uid": "1bTMs51C7gEZ01G7i97we"
               },
               {
                 "name": "res.body[1].text",
                 "value": "eq Message second",
                 "enabled": true,
-                "uid": "9hpi0pVVvQM1fDvrJPY9E"
+                "uid": "kfEszWLbMf0n2sNZr92Ek"
               },
               {
                 "name": "res.body[1].from",
                 "value": "eq {{fromId}}",
                 "enabled": true,
-                "uid": "hVd54vkIwWyxBC3qdXB4Y"
+                "uid": "6I5JVPKXxEKe355wCJQw4"
               },
               {
                 "name": "res.body[1].to",
                 "value": "eq {{toId}}",
                 "enabled": true,
-                "uid": "Q6emv1XihJs4JPF8nwO3i"
+                "uid": "PdI0ez2ggmse17jlD3igx"
               }
             ],
             "tests": "",
@@ -2259,43 +2259,43 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "G7rf7znBD7bgmiCZSDqPl"
+                "uid": "XZF7ygBSb8Om8O06nTcLE"
               },
               {
                 "name": "res.body.id",
                 "value": "isNumber",
                 "enabled": true,
-                "uid": "fAjX7qYq7j7ROQqQNvXAS"
+                "uid": "Fj9fLDd7JOg1KA780S1wv"
               },
               {
                 "name": "res.body.firstName",
                 "value": "eq {{firstName}}",
                 "enabled": true,
-                "uid": "YNRCA9KazjjVj3J9ELOJ9"
+                "uid": "DQQQSslYf9MIT9zdBqJCU"
               },
               {
                 "name": "res.body.lastName",
                 "value": "eq {{lastName}}",
                 "enabled": true,
-                "uid": "ZsuPnHLg0wkbJipS0LhcT"
+                "uid": "1vgD5QOdYIrEMIVzsNX6M"
               },
               {
                 "name": "res.body.age",
                 "value": "eq {{age}}",
                 "enabled": true,
-                "uid": "XzBPqqtmPRSE21vrl4gJu"
+                "uid": "3pAM1Ge2N6jIgAZyPu9ZJ"
               },
               {
                 "name": "res.body.gender",
                 "value": "eq {{gender}}",
                 "enabled": true,
-                "uid": "JBdsrcz8OTq9smNd5pqPi"
+                "uid": "OTbxLq88xft0uAbXrTkgZ"
               },
               {
                 "name": "res.body.city.name",
                 "value": "eq {{city}}",
                 "enabled": true,
-                "uid": "UJLumUB5azQQaOPcrFOsY"
+                "uid": "RQfY513lHKskk7db3DhnS"
               }
             ],
             "tests": "const data = res.getBody();\nbru.setEnvVar(\"userId\", data.id)",
@@ -2335,43 +2335,43 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "seRtB5R2tQ27w7AlZby3P"
+                "uid": "BvhcutEYu2mzxOlVKIrGv"
               },
               {
                 "name": "res.body.id",
                 "value": "isNumber",
                 "enabled": true,
-                "uid": "h5dhNhwxfWHqbHEI63bZc"
+                "uid": "9qwPCdDCFWQtxqi0hoF1h"
               },
               {
                 "name": "res.body.firstName",
                 "value": "eq {{firstName}}",
                 "enabled": true,
-                "uid": "NEnrq0AKnxUus1GW63Ovk"
+                "uid": "PCXe3Nfa2wbQHSkBRfro7"
               },
               {
                 "name": "res.body.lastName",
                 "value": "eq {{lastName}}",
                 "enabled": true,
-                "uid": "ir2LE3gHiZGKmZmqLeQ1i"
+                "uid": "1Rh8Pzfnd7Slb6eNXW5oj"
               },
               {
                 "name": "res.body.age",
                 "value": "eq {{age}}",
                 "enabled": true,
-                "uid": "yoevwMfyo7A7x9rCi3f4a"
+                "uid": "lcFvjXbXY0TsP7VojDzhc"
               },
               {
                 "name": "res.body.gender",
                 "value": "eq {{gender}}",
                 "enabled": true,
-                "uid": "o7iEOJIAeTcGJX9kDcxPC"
+                "uid": "cyf00GzSKXKmD2aqMjVq5"
               },
               {
                 "name": "res.body.city.name",
                 "value": "eq {{city}}",
                 "enabled": true,
-                "uid": "ygAlWASoNjTSErlALryid"
+                "uid": "w93AkMTT5izyKA2ItmjQg"
               }
             ],
             "tests": "const data = res.getBody();\nbru.setEnvVar(\"userId\", data.id)",
@@ -2411,43 +2411,43 @@
                 "name": "res.status",
                 "value": "eq 200",
                 "enabled": true,
-                "uid": "MDGdYOHsOVukpfvNoULiU"
+                "uid": "FEwyQrBzoN7mufaU74DuN"
               },
               {
                 "name": "res.body.id",
                 "value": "isNumber",
                 "enabled": true,
-                "uid": "DMfCkEcVO5OKdXji0GoE1"
+                "uid": "SxgCDySVBYDc3FUIivMaG"
               },
               {
                 "name": "res.body.firstName",
                 "value": "eq {{firstName}}",
                 "enabled": true,
-                "uid": "BlCMbLqKT5gYW0G66qsNN"
+                "uid": "JmJASrkYW40AAZ2rrjGrX"
               },
               {
                 "name": "res.body.lastName",
                 "value": "eq {{lastName}}",
                 "enabled": true,
-                "uid": "4w3QEgI7DERWwcyuswnn0"
+                "uid": "u6KVTLYYQp2HwpQKKpNwL"
               },
               {
                 "name": "res.body.age",
                 "value": "eq {{age}}",
                 "enabled": true,
-                "uid": "jz4rPNmwkjZBGXZG8G6Wh"
+                "uid": "UBHQrd7Wj4d88cPa9wLkR"
               },
               {
                 "name": "res.body.gender",
                 "value": "eq {{gender}}",
                 "enabled": true,
-                "uid": "1c0KEH79xP2ej5aEAVXuM"
+                "uid": "y3BhqttwEywnj3GALUPbo"
               },
               {
                 "name": "res.body.city.name",
                 "value": "eq {{city}}",
                 "enabled": true,
-                "uid": "e4VWFfxyzsQYbGvZVG9i2"
+                "uid": "A2h3jsulyBdvZ0mthKCHO"
               }
             ],
             "tests": "const data = res.getBody();\nbru.setEnvVar(\"userId\", data.id)",
@@ -2457,7 +2457,7 @@
       ]
     }
   ],
-  "activeEnvironmentUid": "lUPptq6887M9BwbL3XTZd",
+  "activeEnvironmentUid": "L8YNxi1IUkadUtoIpJVeY",
   "environments": [
     {
       "variables": [
@@ -2512,42 +2512,49 @@
         },
         {
           "name": "userId",
-          "value": 1000063,
+          "value": 12,
           "enabled": true,
           "secret": false,
           "type": "text"
         },
         {
           "name": "friendId",
-          "value": 1000059,
+          "value": 8,
           "enabled": true,
           "secret": false,
           "type": "text"
         },
         {
           "name": "userLogin",
-          "value": "login_92959",
+          "value": "login_83427",
           "enabled": true,
           "secret": false,
           "type": "text"
         },
         {
           "name": "friendLogin",
-          "value": "login_96076",
+          "value": "login_36793",
           "enabled": true,
           "secret": false,
           "type": "text"
         },
         {
           "name": "userToken",
-          "value": "f8de5db4-a0b3-4098-b219-119a21f28a61",
+          "value": "162c09a9-e529-47d5-b0a8-20d6274d9d02",
           "enabled": true,
           "secret": false,
           "type": "text"
         },
         {
           "name": "friendToken",
-          "value": "1a23219a-cb3f-4575-b7e8-9c9e36e3b808",
+          "value": "a23b4a69-d131-46fe-a1f7-017a769d598f",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "sqlProxyPort",
+          "value": "8081",
           "enabled": true,
           "secret": false,
           "type": "text"
